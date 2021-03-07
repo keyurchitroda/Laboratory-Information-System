@@ -1,0 +1,87 @@
+﻿@model IEnumerable<LIS.Model.Models.tblequipement>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+
+
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            Equipement
+        </div>
+    </div>
+    <div class="card-body col-md-12">
+        <table id="tblequipement" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Equipement Name
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    @*<th>
+                            Price
+                        </th>*@
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.equipementname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.quantity)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.price)
+                            </td>*@
+
+                        <td>
+                            <a href="@Url.Action("Edit","Equipment",new { id = item.equipementid })" class="btn btn-sm btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>|
+                            <a href="@Url.Action("Details","Equipment",new { id = item.equipementid })" class="btn btn-sm btn-success">
+                                <i class="fa fa-eye"></i>
+                            </a>|
+                            <a href="@Url.Action("Delete","Equipment",new { id = item.equipementid })" onclick="return confirm('Are you sure you wish to delete this equipement?');" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>|
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+
+
+        </table>
+    </div>
+    <div class="card-footer">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tblequipement').DataTable();
+    });
+
+
+
+
+</script>

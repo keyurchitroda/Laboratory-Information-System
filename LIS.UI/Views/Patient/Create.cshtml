@@ -1,0 +1,190 @@
+﻿@model LIS.Model.Models.tblpatient
+
+<!--Header-->
+<div class="card card-body breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Add Patient</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li>
+                                <a href="@Url.Action("Index")" class="btn btn-sm btn-info right">
+                                    <i class="fa fa-arrow-left"></i> Back
+                                </a>
+                            </li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Header-->
+
+
+@using (Html.BeginForm(null,null, FormMethod.Post , new { id="myform" })) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+
+                    </div>
+                        <div class="card-body col-md-12">
+                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                <label class="control-label col-md-5" for="patientfirstname">First name</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.patientfirstname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.patientfirstname,"", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        
+                            <div class="form-group">
+                                <label class="control-label col-md-5" for="patientmiddelname">Middel name</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.patientmiddelname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.patientmiddelname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="patientlastname">Last name</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.patientlastname, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.patientlastname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="patientdob">Dob</label>
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.patientdob, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.patientdob, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-5" for="patientmaritalstatus">Marital status</label>
+                                <div class="col-md-10">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.patientmaritalstatus)
+                                        @Html.ValidationMessageFor(model => model.patientmaritalstatus, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="patientemail">Email</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.patientemail, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.patientemail, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="patientmobllienumber">Moblie number</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.patientmobllienumber, new { htmlAttributes = new { @class = "form-control patientdob" } })
+                                    @Html.ValidationMessageFor(model => model.patientmobllienumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3" for="patientemergencynumber">Emergency number</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.patientemergencynumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.patientemergencynumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2" for="HL7">HL7</label>
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.HL7, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.HL7, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-success" />
+                                    <input type="reset" value="Cancel" class="btn btn-danger" />
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        //jQuery("#patientdob").datepicker();
+        $("#myform").validate({
+            rules: {
+                patientfirstname: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 15,
+                    lettersonly: true,
+                },
+                patientmiddelname: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 15,
+                    lettersonly: true,
+                },
+                patientlastname: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 15,
+                    lettersonly: true,
+                },
+                patientdob:
+                {
+                    required: true,
+                },
+                patientmaritalstatus:
+                {
+                    required: true,
+                },
+                patientemail:
+                {
+                    required: true,
+                    email: true,
+                },
+                patientmobllienumber:
+                {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 10,
+                    number:true,
+                },
+                patientemergencynumber:
+                {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 10,
+                    number:true,
+                },
+            }
+        });   
+    });
+</script>

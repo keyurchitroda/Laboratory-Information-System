@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Equipement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form id="frmequipement">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Manage Equipement </div>
+                    </div>
+                    <div class="card-body col-md-7">
+                        <div class="form-group">
+                            <label for="txtequipement">Equipement Name</label>
+                            <input type="text" class="form-control" id="txtequipementname" name="txtequipementname" />
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <input type="button" id="btnequipmentsave" name="btnequipmentsave" class="btn btn-success" value="Save" />
+                            <input type="button" name="btnequipmentcancel" class="btn btn-default" value="Cancel" />
+                        </div>
+                       
+
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    jQuery("#frmequipement").validate({
+        rules: {
+            "txtequipementname": {
+                required: true,
+
+                maxlength: 60,
+
+            }
+
+
+        },
+        messages: {
+            "txtequipementname": {
+                required: "Please enter equipement name.",
+                maxlength: "Equipement name cannot be more than 60 characters."
+            }
+
+        },
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = jQuery(element).data('error');
+            if (placement) {
+                jQuery(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        }
+
+
+    });
+    jQuery(document).ready(function () {
+        jQuery(document).off("click", "#btnequipmentsave");
+        jQuery(document).on("click", "#btnequipmentsave", function (e) {
+            if (jQuery("#frmequipement").valid()) {
+
+            }
+        });
+    });
+</script>
+

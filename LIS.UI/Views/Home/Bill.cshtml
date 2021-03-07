@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Bill";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bill</h2>
+
+<form id="frmbill">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Manage Bill</div>
+                    </div>
+                    <div class="card-body col-md-7">
+
+                        <div class="form-group">
+                            <label for="selectdpatientid" class=" form-control-label">Patient id</label>
+
+                            <select name="selectdpatientid" id="selectdpatientid" class="form-control-sm form-control">
+                                <option value="0">Please select</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                                <option value="4">Option #4</option>
+                                <option value="5">Option #5</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label class=" form-control-label">Total Price</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-usd"></i></div>
+                                <input class="form-control" id="txttprice" name="txttprice">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="generateddate" class="form-control-label">Generated Time</label>
+
+                            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="generateddate" name="generateddate" />
+
+                        </div>
+                        <div class="form-group">
+                            <input type="button" id="btnbillsave" name="btnbillsave" class="btn btn-success" value="Save" />
+                            <input type="button" name="btnbillcancel" class="btn btn-default" value="Cancel" />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

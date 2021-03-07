@@ -1,0 +1,68 @@
+﻿<form class="form-inline">
+    <select id="patientlist" class="form-control col-md-4">
+        <option id="default">Select Patient</option>
+    </select>
+    <input class="btn btn-success ml-2" id="submitform" type="submit" value="Get String" />
+</form>
+
+<div id="opstring" style="border:1px solid black;min-height:200px;margin-top:10px;font-size:x-small" class="p-2 rounded"></div>
+<br />
+<Button class="btn btn-warning ml-2" id="copydata" type="submit" value="Get String" onclick="CopyToClipboard('opstring')">Please to copy</Button>
+
+<script>
+    var btn = document.getElementById('copydata');
+    function CopyToClipboard(containerid) {
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select().createTextRange();
+            document.execCommand("copy");
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+
+            
+            btn.innerText = "Copied";
+
+            //alert("Text has been copied, now paste in the text-area")
+        }
+    }
+
+    $(document).ready(function () {
+        $.ajax({
+            url: "/HL7/GetAllPatient",
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                var html = '<option value="" selected disabled>-- Select Patient --</option>';
+                for (var i = 0; i < result.length; i++) {
+                    var obj = result[i];
+                    html += `<option value=${obj.patientid}> ${obj.patientfirstname} ${obj.patientmiddelname} ${obj.patientlastname}</option>`;
+                }
+                $('#patientlist').html(html);
+            },
+            error: function (errormessage) {
+
+            }
+        });
+        $('#submitform').on('click', function (e) {
+            e.preventDefault();
+            var SelectedPatient = $('#patientlist').children("option:selected").val();
+            $.ajax({
+                url: "/HL7/ProcessHL7/" + SelectedPatient,
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    $('#opstring').html(result);
+                },
+                error: function (errormessage) {
+
+                }
+            });
+        });
+    })
+</script>

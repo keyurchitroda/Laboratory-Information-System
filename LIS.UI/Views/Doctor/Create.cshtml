@@ -1,0 +1,126 @@
+﻿@model LIS.Model.Models.tbldoctor
+
+<!--Header-->
+<div class="card card-body breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Add Doctor</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li>
+                                <a href="@Url.Action("Index")" class="btn btn-sm btn-info right">
+                                    <i class="fa fa-arrow-left"></i> Back
+                                </a>
+                            </li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Header-->
+
+
+@using (Html.BeginForm(null,null, FormMethod.Post , new { id="myform" })) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+
+                    </div>
+                    <div class="card-body col-md-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+
+                            <label class="control-label col-md-5" for="doctorname">Doctor name</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.doctorname, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.doctorname, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-5" for="doctormoblienumber">Mobile no</label>
+                           
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.doctormoblienumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.doctormoblienumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="designation">Designation</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.designation, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.designation, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="doctoremail">Email</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.doctoremail, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.doctoremail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-success" />
+                                <input type="reset" value="Cancel" class="btn btn-danger" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type='text/javascript'>
+
+    $(document).ready(function () {
+
+        $("#myform").validate({
+            rules: {
+                doctorname:
+                {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 25,
+                },
+                doctoremail:
+                {
+                    required: true,
+                    email:true,
+                },
+                doctormoblienumber:
+                {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 10,
+                    number:true,
+                },
+                designation:
+                {
+                    required: true,
+                },
+            }
+        });
+    })
+</script>

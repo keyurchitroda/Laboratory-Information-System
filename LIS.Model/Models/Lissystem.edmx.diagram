@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d6ed8bda406a4510876a49f1fc53a378" Name="Diagram1">
+        <EntityTypeShape EntityType="LissystemModel.tblanalytic" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tblbill" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tblcollector" Width="1.5" PointX="0.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tbldoctor" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tblequipement" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tblmachine" Width="1.5" PointX="8.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tblorder" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tblpatient" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tblpatienttestresult" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tblpurchase" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tblrecord" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tblrole" Width="1.5" PointX="5.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tblsupplier" Width="1.5" PointX="3.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tbltestmaster" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LissystemModel.tbluser" Width="1.5" PointX="8" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="LissystemModel.FK__tblpatien__analy__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK__tblbill__recordi__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK_bill_patient" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK__tblrecord__colle__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK__tblrecord__docto__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK_tblorder_tblequipement" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK_tblpurchase_tblequipement" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK_tblorder_tblpatient" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK__tblpatien__patie__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK__tblrecord__patie__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK__tblpatien__recor__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK__tblpatien__testi__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK_tblpurchase_tblsupplier" ManuallyRouted="false" />
+        <AssociationConnector Association="LissystemModel.FK_tbluser_tblrole" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,181 @@
+﻿@model LIS.Model.Models.tblbill
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+
+
+    <dl class="dl-horizontal">
+        @Html.HiddenFor(Model => Model.patientid)
+    </dl>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var patientid = $('#patientid').val();
+
+        //$("#date").datepicker();
+
+        //getTestFromPatientId
+        $.ajax({
+            url: "/Bill/getRecordIdFromPatient/" + patientid,
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                var html1 = '';
+                //  var total = 0;
+
+                for (var i = 0; i < result.length; i++) {
+                    var obj = result[i];
+                    html += `<h4> ${obj.testname}</h4>`;
+                    html1 += `<h4> ${obj.testprice}</h4>`;
+                    // total += obj.testprice;
+                }
+                $('#test').html(html);
+                $('#price').html(html1);
+                //jQuery('#totalprice').html(total);
+            },
+            error: function (errormessage) {
+
+            }
+        });
+
+    });
+</script>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    </style>
+</head>
+<body>
+
+    <p>
+        <input type="button" value="Print" class="btn btn-danger" onclick="codespeedy()" />
+    </p>
+
+
+    <div class="container" id="bills">
+        <div class="card">
+            <div class="card-header">
+
+
+
+                <div class="row">
+                    <div class="col-md-4"> <img src="~/Content/images/download.jpeg" alt="Girl in a jacket" width="150" height="75" /></div>
+                    @*<div class="col-md-4 offset-md-4"> @Html.DisplayFor(model => model.generateddate)</div>*@
+                </div>
+                <center>
+                    <div>
+                        <h3 class="color-red mb-2">LIS system</h3>
+                        <h6> C/o. Surat-4,Gujrat,India, Ph.:0216-7896541/02</h6>
+                        <h6 class="color-red mt-2">By Appointment :- Time: 9.00 A.M. to 9.00 P.M. Sunday close</h6>
+                        _________________________________________________________________________________________________________
+                    </div>
+                </center>
+
+
+
+
+            </div>
+
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-sm-12">
+                        <div class="pull-right"><label>Invoice Date:</label>   @Html.DisplayFor(model => model.generateddate) </div>
+                        <h6 class="mb-3">From:LIS system</h6>
+
+                        <div>Email: lissystem.co.in</div>
+                        <div>Phone: +91 985 524 6548</div>
+
+
+
+                        <!-- /col-md-3 -->
+
+
+
+
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="col-sm-6">
+                        <h6 class="mb-3">To:</h6>
+                        <div>
+                            <strong>
+                                <dh>
+                                    @Html.DisplayFor(model => model.tblpatient.patientfirstname)
+                                    @Html.DisplayFor(model => model.tblpatient.patientmiddelname)
+
+                                    @Html.DisplayFor(model => model.tblpatient.patientlastname)
+
+                                </dh>
+                            </strong>
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="center">Bill no</th>
+                                <th>Test Name</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+
+
+
+
+                        <tbody>
+
+
+                            <tr>
+                                <td class="center alert" role="alert"> @Html.DisplayFor(model => model.billid)</td>
+                                <td id="test" class="left alert" role="alert"></td>
+                                <td id="price" class="left alert" role="alert"></td>
+                            </tr>
+                            </hr>
+                            <tr>
+                                <td></td>
+                                <td class="left">
+                                    <strong>Total</strong>
+                                </td>
+                                <td class="right">
+                                    <strong> @Html.DisplayFor(model => model.totalprice)</strong>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+          
+
+        </div>
+    </div>
+    
+
+</body>
+</html>
+<script type="text/javascript">
+
+    function codespeedy() {
+        
+        $(".card").print();
+    }
+
+</script>

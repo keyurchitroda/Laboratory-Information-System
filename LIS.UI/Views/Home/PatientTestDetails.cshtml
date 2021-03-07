@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "PatientTestDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>PatientTestDetails</h2>
+<form id="frmpatienttestdetails">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Manage Patient Test Details </div>
+                    </div>
+                    <div class="card-body col-md-7">
+
+                        <div class="form-group">
+                            <label for="selectpatienttestid" class=" form-control-label">Patient Test ID</label>
+
+                            <select name="selectpatienttestid" id="selectpatienttestid" class="form-control-sm form-control">
+                                <option value="0">Please select</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                                <option value="4">Option #4</option>
+                                <option value="5">Option #5</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="selecttestdetailid" class=" form-control-label">Test Detail ID</label>
+
+                            <select name="selecttestdetailid" id="selecttestdetailid" class="form-control-sm form-control">
+                                <option value="0">Please select</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                                <option value="4">Option #4</option>
+                                <option value="5">Option #5</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="txtpreading">Patient Reading</label>
+                            <input type="text" class="form-control" id="txtpreading" name="txtpreading" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="button" id="btnptdsave" name="btnptdsave" class="btn btn-success" value="Save" />
+                            <input type="reset" name="btnptdcancel" class="btn btn-default" value="Cancel" />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

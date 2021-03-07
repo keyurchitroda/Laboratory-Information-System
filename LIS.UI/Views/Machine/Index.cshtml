@@ -1,0 +1,68 @@
+﻿@model IEnumerable<LIS.Model.Models.tblmachine>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            Machines
+        </div>
+    </div>
+    <div class="card-body col-md-12">
+        <table id="tblmachine" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Machine Name
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.machinename)
+                        </td>
+
+                        <td>
+                            <a href="@Url.Action("Download","Machine", new { filename = item.template })" class="btn btn-default">
+                                <i class="fa fa-download"></i>
+                            </a>
+                            <a href="@Url.Action("Edit","Machine",new { id = item.machineid })" class="btn btn-sm btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>|
+                            <a href="@Url.Action("Details","Machine",new { id = item.machineid })" class="btn btn-sm btn-success">
+                                <i class="fa fa-eye"></i>
+                            </a>|
+                            <a href="@Url.Action("Delete","Machine",new { id = item.machineid })" onclick="return confirm('Are you sure you wish to delete this Machine?');" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>|
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+
+
+        </table>
+    </div>
+    <div class="card-footer">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tblmachine').DataTable();
+    });
+</script>

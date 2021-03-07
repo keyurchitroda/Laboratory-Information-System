@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Stock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Stock</h2>
+<form id="frmstock">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Manage Stocks </div>
+                    </div>
+                    <div class="card-body col-md-7">
+
+                        <div class="form-group">
+                            <label for="selectsupplierid" class=" form-control-label">Supplier ID</label>
+
+                            <select name="selectsupplierid" id="selectsupplierid" class="form-control-sm form-control">
+                                <option value="0">Please select</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                                <option value="4">Option #4</option>
+                                <option value="5">Option #5</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="selectpatientid" class=" form-control-label">Patient ID</label>
+
+                            <select name="selectpatientid" id="selectpatientid" class="form-control-sm form-control">
+                                <option value="0">Please select</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                                <option value="4">Option #4</option>
+                                <option value="5">Option #5</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="selectequipementid" class=" form-control-label">Equipement ID</label>
+
+                            <select name="selectequipementid" id="selectequipementid" class="form-control-sm form-control">
+                                <option value="0">Please select</option>
+                                <option value="1">Option #1</option>
+                                <option value="2">Option #2</option>
+                                <option value="3">Option #3</option>
+                                <option value="4">Option #4</option>
+                                <option value="5">Option #5</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label class=" form-control-label">Price</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-usd"></i></div>
+                                <input class="form-control" id="txtprice" name="txtprice">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="txtquentity">Quentity</label>
+                            <input type="text" class="form-control" id="txtquentity" name="txtquentity" />
+                        </div>
+                        <div class="form-group">
+                            <label class=" form-control-label">Total Price</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-usd"></i></div>
+                                <input class="form-control" id="txttprice" name="txttprice">
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="arriveddate" class="form-control-label">Date and time</label>
+
+                            <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="arriveddate" name="arriveddate" />
+
+                        </div>
+                        <div class="form-group">
+                            <input type="button" id="btnstocksave" name="btnstocksave" class="btn btn-success" value="Save" />
+                            <input type="reset" name="btnstockcancel" class="btn btn-default" value="Cancel" />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

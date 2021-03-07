@@ -1,0 +1,90 @@
+﻿@model IEnumerable<LIS.Model.Models.tblpurchase>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            Purchases
+        </div>
+    </div>
+    <div class="card-body col-md-12">
+        <table id="tblpurchase" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Supplier Name
+                    </th>
+                    <th>
+                        Equipement Name
+                    </th>
+                    <th>
+                        quantity
+                    </th>
+                    <th>
+                        Purchase Price
+                    </th>
+                    <th>
+                        Purchase Date
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblsupplier.suppliername)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblequipement.equipementname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.purchaseprice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.purchasedate)
+                        </td>
+
+                        <td>
+                            <a href="@Url.Action("Edit","Purchase",new { id = item.purchaseid })" class="btn btn-sm btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>|
+                            <a href="@Url.Action("Details","Purchase",new { id = item.purchaseid })" class="btn btn-sm btn-success">
+                                <i class="fa fa-eye"></i>
+                            </a>|
+                            <a href="@Url.Action("Delete","Purchase",new { id = item.purchaseid })" onclick="return confirm('Are you sure you wish to delete this supplier?');" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>|
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+
+
+        </table>
+    </div>
+    <div class="card-footer">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tblpurchase').DataTable();
+    });
+</script>

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<LIS.Model.Models.tblpatienttestresult>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            Manage Patienttestresult
+        </div>
+    </div>
+    <div class="card-body col-md-12">
+        <table id="tblpatienttestresult" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Patient name
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    @*<th>
+            Test name
+        </th>
+        <th>
+            Diagnosis item
+        </th>
+        <th>
+            Reding
+        </th>
+        <th>
+            Date
+        </th>*@
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.GroupBy(p=>new { p.patientid,p.date }))
+                {
+                    <tr>
+                        <td>
+                            @{ 
+                                var pname = item.Select(p => p.tblpatient.patientfirstname).ToList()[0];
+                                var mname = item.Select(p => p.tblpatient.patientmiddelname).ToList()[0];
+                                var lname = item.Select(p => p.tblpatient.patientlastname).ToList()[0];
+                                var date = item.Select(p => p.date).ToList()[0];
+                                var pid = item.Select(p => p.patientid).ToList()[0];
+                            }
+                            @pname @mname @lname 
+                        </td>
+                        <td>
+                            @date
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.tbltestmaster.testname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblanalytic.diagnosisitem)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.reading)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date)
+                        </td>*@
+                    <td>
+                        @*<a href="@Url.Action("Edit","Patienttestresult",new { id = item.patienttestresultid })" class="btn btn-sm btn-warning">
+            <i class="fa fa-pencil"></i>
+        </a>|*@
+                        <a href="@Url.Action("Details","Patienttestresult",new { id = pid, @pdate =date })" class="btn btn-sm btn-success">
+                            <i class="fa fa-eye"></i>
+                        </a> |
+                        <a href="@Url.Action("Delete","Patienttestresult",new { id = pid, @pdate =date })" onclick="return confirm('Are you sure you wish to delete this patienttestresult ?');" class="btn btn-sm btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tblpatienttestresult').DataTable();
+    });
+</script>

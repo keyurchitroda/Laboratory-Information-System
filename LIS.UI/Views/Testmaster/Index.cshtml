@@ -1,0 +1,64 @@
+﻿@model IEnumerable<LIS.Model.Models.tbltestmaster>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            Manage Test
+        </div>
+    </div>
+    <div class="card-body col-md-12">
+        <table id="tbltestmaster" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Test name
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Analytic list
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.testname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.testprice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.analyticlist)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit","Testmaster",new { id = item.testid })" class="btn btn-sm btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>|
+                            <a href="@Url.Action("Details","Testmaster",new { id = item.testid })" class="btn btn-sm btn-success">
+                                <i class="fa fa-eye"></i>
+                            </a>|
+                            <a href="@Url.Action("Delete","Testmaster",new { id = item.testid })" onclick="return confirm('Are you sure you wish to delete this test ?');" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>|
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tbltestmaster').DataTable();
+    });
+</script>

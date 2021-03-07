@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Supplier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form id="frmsupplier">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Manage Supplier</div>
+                    </div>
+                    <div class="card-body col-md-7">
+                        <div class="form-group">
+                            <label for="txtsuppliername">Supplier Name</label>
+                            <input type="text" class="form-control" id="txtsuppliername" name="txtsuppliername" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtsuppliermobile">Supplier Mobileno</label>
+                            <input type="text" class="form-control" id="txtsuppliermobile" name="txtsuppliermobile" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtsupplieremail">Supplier Email</label>
+                            <input type="text" class="form-control" id="txtsupplieremail" name="txtsupplieremail" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="txtsupplieraddress">Supplier Address</label>
+                            <textarea class="form-control" id="txtsupplieraddress" name="txtsupplieraddress"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="button" id="btnsuppliersave" name="btnsuppliersave" class="btn btn-success" value="Save" />
+                            <input type="button" name="btnsuppliercancel" class="btn btn-default" value="Cancel" />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    jQuery("#frmsupplier").validate({
+        rules: {
+            "txtsuppliername": {
+                required: true,
+
+                maxlength: 60,
+
+            },
+            "txtsuppliermobile": {
+                required: true,
+
+                maxlength: 60,
+
+            },
+            "txtsupplieremail": {
+                required: true,
+                email: true,
+                maxlength: 60,
+
+            },
+            "txtsupplieraddress": {
+                required: true,
+
+                maxlength: 60,
+
+            }
+
+
+        },
+        messages: {
+            "txtsuppliername": {
+                required: "Please enter supplier name.",
+                maxlength:"supplier name cannot be more than 60 characters."
+            },
+            "txtsuppliermobile": {
+                required: "Please enter supplier mobileno.",
+                maxlength: "supplier mobileno cannot be more than 60 characters."
+            },
+            "txtsupplieremail": {
+                required: "Please enter supplier email.",
+                email:"Please enter valid email.",
+                maxlength: "supplier email cannot be more than 60 characters."
+            },
+            "txtsupplieraddress": {
+                required: "Please enter supplier address.",
+                maxlength: "supplier address cannot be more than 60 characters."
+            }
+
+        },
+        onfocusout: function (element) {
+            var $el = jQuery(element);
+            if (!$el.is('select') && element.value === '' && element.defaultValue === '') {
+                // for untouched text fields, don't validate on blur
+                return;
+            }
+            $el.valid();
+        },
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = jQuery(element).data('error');
+            if (placement) {
+                jQuery(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        }
+
+
+    });
+    jQuery(document).ready(function () {
+        jQuery(document).off("click", "#btnsuppliersave");
+        jQuery(document).on("click", "#btnsuppliersave", function (e) {
+            if (jQuery("#frmsupplier").valid()) {
+
+            }
+        });
+    });
+</script>
+

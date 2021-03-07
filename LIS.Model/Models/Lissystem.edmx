@@ -1,0 +1,1113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LissystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblanalytics">
+          <Key>
+            <PropertyRef Name="analyticid" />
+          </Key>
+          <Property Name="analyticid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="diagnosisitem" Type="varchar" MaxLength="50" />
+          <Property Name="value" Type="float" />
+          <Property Name="minvalue" Type="float" />
+          <Property Name="maxvalue" Type="float" />
+          <Property Name="measurementunit" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblbill">
+          <Key>
+            <PropertyRef Name="billid" />
+          </Key>
+          <Property Name="billid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientid" Type="int" />
+          <Property Name="totalprice" Type="float" />
+          <Property Name="generateddate" Type="date" />
+          <Property Name="recordid" Type="int" />
+        </EntityType>
+        <EntityType Name="tblcollector">
+          <Key>
+            <PropertyRef Name="collectorid" />
+          </Key>
+          <Property Name="collectorid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="collectorname" Type="varchar" MaxLength="50" />
+          <Property Name="collectoremail" Type="varchar" MaxLength="50" />
+          <Property Name="collectorphno" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbldoctor">
+          <Key>
+            <PropertyRef Name="doctorid" />
+          </Key>
+          <Property Name="doctorid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="doctorname" Type="varchar" MaxLength="50" />
+          <Property Name="doctormoblienumber" Type="varchar" MaxLength="50" />
+          <Property Name="designation" Type="varchar" MaxLength="50" />
+          <Property Name="doctoremail" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblequipement">
+          <Key>
+            <PropertyRef Name="equipementid" />
+          </Key>
+          <Property Name="equipementid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="equipementname" Type="varchar" MaxLength="50" />
+          <Property Name="quantity" Type="bigint" />
+          <Property Name="price" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tblmachine">
+          <Key>
+            <PropertyRef Name="machineid" />
+          </Key>
+          <Property Name="machineid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="machinename" Type="varchar" MaxLength="50" />
+          <Property Name="template" Type="text" />
+        </EntityType>
+        <EntityType Name="tblorder">
+          <Key>
+            <PropertyRef Name="orderid" />
+          </Key>
+          <Property Name="orderid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientid" Type="int" />
+          <Property Name="equipementid" Type="int" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="quantity" Type="bigint" />
+          <Property Name="totalprice" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tblpatient">
+          <Key>
+            <PropertyRef Name="patientid" />
+          </Key>
+          <Property Name="patientid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientfirstname" Type="varchar" MaxLength="50" />
+          <Property Name="patientmiddelname" Type="varchar" MaxLength="50" />
+          <Property Name="patientlastname" Type="varchar" MaxLength="50" />
+          <Property Name="patientdob" Type="date" />
+          <Property Name="patientmaritalstatus" Type="bit" />
+          <Property Name="patientemail" Type="varchar" MaxLength="50" />
+          <Property Name="patientmobllienumber" Type="varchar" MaxLength="50" />
+          <Property Name="patientemergencynumber" Type="varchar" MaxLength="50" />
+          <Property Name="created" Type="datetime" />
+          <Property Name="updated" Type="datetime" />
+          <Property Name="HL7" Type="text" />
+        </EntityType>
+        <EntityType Name="tblpatienttestresult">
+          <Key>
+            <PropertyRef Name="patienttestresultid" />
+          </Key>
+          <Property Name="patienttestresultid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="recordid" Type="int" />
+          <Property Name="patientid" Type="int" />
+          <Property Name="testid" Type="int" />
+          <Property Name="analyticid" Type="int" />
+          <Property Name="reading" Type="varchar" MaxLength="100" />
+          <Property Name="date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblpurchase">
+          <Key>
+            <PropertyRef Name="purchaseid" />
+          </Key>
+          <Property Name="purchaseid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="equipementid" Type="int" />
+          <Property Name="supplierid" Type="int" />
+          <Property Name="quantity" Type="bigint" />
+          <Property Name="purchaseprice" Type="bigint" />
+          <Property Name="purchasedate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblrecord">
+          <Key>
+            <PropertyRef Name="recordid" />
+          </Key>
+          <Property Name="recordid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patientid" Type="int" />
+          <Property Name="doctorid" Type="int" />
+          <Property Name="collectorid" Type="int" />
+          <Property Name="samplenumber" Type="varchar" MaxLength="255" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="testid" Type="varchar" MaxLength="255" />
+          <Property Name="priority" Type="bit" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="tblrole">
+          <Key>
+            <PropertyRef Name="roleid" />
+          </Key>
+          <Property Name="roleid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rolename" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="text" />
+          <Property Name="createdby" Type="int" />
+          <Property Name="createddate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblsupplier">
+          <Key>
+            <PropertyRef Name="supplierid" />
+          </Key>
+          <Property Name="supplierid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="suppliername" Type="varchar" MaxLength="50" />
+          <Property Name="suppliermoblienumber" Type="varchar" MaxLength="50" />
+          <Property Name="supplieremail" Type="varchar" MaxLength="50" />
+          <Property Name="supplieraddress" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="tbltestmaster">
+          <Key>
+            <PropertyRef Name="testid" />
+          </Key>
+          <Property Name="testid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="testname" Type="varchar" MaxLength="50" />
+          <Property Name="testprice" Type="float" />
+          <Property Name="analyticlist" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tbluser">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" />
+          <Property Name="middlename" Type="varchar" MaxLength="50" />
+          <Property Name="lastname" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="255" />
+          <Property Name="gender" Type="varchar" MaxLength="50" />
+          <Property Name="mobileno" Type="varchar" MaxLength="50" />
+          <Property Name="isactive" Type="bit" />
+          <Property Name="roleid" Type="int" />
+        </EntityType>
+        <Association Name="FK__tblbill__recordi__5165187F">
+          <End Role="tblrecord" Type="Self.tblrecord" Multiplicity="0..1" />
+          <End Role="tblbill" Type="Self.tblbill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblrecord">
+              <PropertyRef Name="recordid" />
+            </Principal>
+            <Dependent Role="tblbill">
+              <PropertyRef Name="recordid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblpatien__analy__5629CD9C">
+          <End Role="tblanalytics" Type="Self.tblanalytics" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblpatienttestresult" Type="Self.tblpatienttestresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblanalytics">
+              <PropertyRef Name="analyticid" />
+            </Principal>
+            <Dependent Role="tblpatienttestresult">
+              <PropertyRef Name="analyticid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblpatien__patie__571DF1D5">
+          <End Role="tblpatient" Type="Self.tblpatient" Multiplicity="0..1" />
+          <End Role="tblpatienttestresult" Type="Self.tblpatienttestresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblpatient">
+              <PropertyRef Name="patientid" />
+            </Principal>
+            <Dependent Role="tblpatienttestresult">
+              <PropertyRef Name="patientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblpatien__recor__5812160E">
+          <End Role="tblrecord" Type="Self.tblrecord" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblpatienttestresult" Type="Self.tblpatienttestresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblrecord">
+              <PropertyRef Name="recordid" />
+            </Principal>
+            <Dependent Role="tblpatienttestresult">
+              <PropertyRef Name="recordid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblpatien__testi__5535A963">
+          <End Role="tbltestmaster" Type="Self.tbltestmaster" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblpatienttestresult" Type="Self.tblpatienttestresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbltestmaster">
+              <PropertyRef Name="testid" />
+            </Principal>
+            <Dependent Role="tblpatienttestresult">
+              <PropertyRef Name="testid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblrecord__colle__5CD6CB2B">
+          <End Role="tblcollector" Type="Self.tblcollector" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblrecord" Type="Self.tblrecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblcollector">
+              <PropertyRef Name="collectorid" />
+            </Principal>
+            <Dependent Role="tblrecord">
+              <PropertyRef Name="collectorid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblrecord__docto__5BE2A6F2">
+          <End Role="tbldoctor" Type="Self.tbldoctor" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblrecord" Type="Self.tblrecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbldoctor">
+              <PropertyRef Name="doctorid" />
+            </Principal>
+            <Dependent Role="tblrecord">
+              <PropertyRef Name="doctorid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblrecord__patie__5AEE82B9">
+          <End Role="tblpatient" Type="Self.tblpatient" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblrecord" Type="Self.tblrecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblpatient">
+              <PropertyRef Name="patientid" />
+            </Principal>
+            <Dependent Role="tblrecord">
+              <PropertyRef Name="patientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bill_patient">
+          <End Role="tblpatient" Type="Self.tblpatient" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblbill" Type="Self.tblbill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblpatient">
+              <PropertyRef Name="patientid" />
+            </Principal>
+            <Dependent Role="tblbill">
+              <PropertyRef Name="patientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorder_tblequipement">
+          <End Role="tblequipement" Type="Self.tblequipement" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblorder" Type="Self.tblorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblequipement">
+              <PropertyRef Name="equipementid" />
+            </Principal>
+            <Dependent Role="tblorder">
+              <PropertyRef Name="equipementid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorder_tblpatient">
+          <End Role="tblpatient" Type="Self.tblpatient" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblorder" Type="Self.tblorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblpatient">
+              <PropertyRef Name="patientid" />
+            </Principal>
+            <Dependent Role="tblorder">
+              <PropertyRef Name="patientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblpurchase_tblequipement">
+          <End Role="tblequipement" Type="Self.tblequipement" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblpurchase" Type="Self.tblpurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblequipement">
+              <PropertyRef Name="equipementid" />
+            </Principal>
+            <Dependent Role="tblpurchase">
+              <PropertyRef Name="equipementid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblpurchase_tblsupplier">
+          <End Role="tblsupplier" Type="Self.tblsupplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblpurchase" Type="Self.tblpurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblsupplier">
+              <PropertyRef Name="supplierid" />
+            </Principal>
+            <Dependent Role="tblpurchase">
+              <PropertyRef Name="supplierid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbluser_tblrole">
+          <End Role="tblrole" Type="Self.tblrole" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbluser" Type="Self.tbluser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblrole">
+              <PropertyRef Name="roleid" />
+            </Principal>
+            <Dependent Role="tbluser">
+              <PropertyRef Name="roleid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LissystemModelStoreContainer">
+          <EntitySet Name="tblanalytics" EntityType="Self.tblanalytics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblbill" EntityType="Self.tblbill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblcollector" EntityType="Self.tblcollector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbldoctor" EntityType="Self.tbldoctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblequipement" EntityType="Self.tblequipement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblmachine" EntityType="Self.tblmachine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblorder" EntityType="Self.tblorder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblpatient" EntityType="Self.tblpatient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblpatienttestresult" EntityType="Self.tblpatienttestresult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblpurchase" EntityType="Self.tblpurchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblrecord" EntityType="Self.tblrecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblrole" EntityType="Self.tblrole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblsupplier" EntityType="Self.tblsupplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbltestmaster" EntityType="Self.tbltestmaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbluser" EntityType="Self.tbluser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblbill__recordi__5165187F" Association="Self.FK__tblbill__recordi__5165187F">
+            <End Role="tblrecord" EntitySet="tblrecord" />
+            <End Role="tblbill" EntitySet="tblbill" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblpatien__analy__5629CD9C" Association="Self.FK__tblpatien__analy__5629CD9C">
+            <End Role="tblanalytics" EntitySet="tblanalytics" />
+            <End Role="tblpatienttestresult" EntitySet="tblpatienttestresult" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblpatien__patie__571DF1D5" Association="Self.FK__tblpatien__patie__571DF1D5">
+            <End Role="tblpatient" EntitySet="tblpatient" />
+            <End Role="tblpatienttestresult" EntitySet="tblpatienttestresult" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblpatien__recor__5812160E" Association="Self.FK__tblpatien__recor__5812160E">
+            <End Role="tblrecord" EntitySet="tblrecord" />
+            <End Role="tblpatienttestresult" EntitySet="tblpatienttestresult" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblpatien__testi__5535A963" Association="Self.FK__tblpatien__testi__5535A963">
+            <End Role="tbltestmaster" EntitySet="tbltestmaster" />
+            <End Role="tblpatienttestresult" EntitySet="tblpatienttestresult" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblrecord__colle__5CD6CB2B" Association="Self.FK__tblrecord__colle__5CD6CB2B">
+            <End Role="tblcollector" EntitySet="tblcollector" />
+            <End Role="tblrecord" EntitySet="tblrecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblrecord__docto__5BE2A6F2" Association="Self.FK__tblrecord__docto__5BE2A6F2">
+            <End Role="tbldoctor" EntitySet="tbldoctor" />
+            <End Role="tblrecord" EntitySet="tblrecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblrecord__patie__5AEE82B9" Association="Self.FK__tblrecord__patie__5AEE82B9">
+            <End Role="tblpatient" EntitySet="tblpatient" />
+            <End Role="tblrecord" EntitySet="tblrecord" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bill_patient" Association="Self.FK_bill_patient">
+            <End Role="tblpatient" EntitySet="tblpatient" />
+            <End Role="tblbill" EntitySet="tblbill" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorder_tblequipement" Association="Self.FK_tblorder_tblequipement">
+            <End Role="tblequipement" EntitySet="tblequipement" />
+            <End Role="tblorder" EntitySet="tblorder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorder_tblpatient" Association="Self.FK_tblorder_tblpatient">
+            <End Role="tblpatient" EntitySet="tblpatient" />
+            <End Role="tblorder" EntitySet="tblorder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblpurchase_tblequipement" Association="Self.FK_tblpurchase_tblequipement">
+            <End Role="tblequipement" EntitySet="tblequipement" />
+            <End Role="tblpurchase" EntitySet="tblpurchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblpurchase_tblsupplier" Association="Self.FK_tblpurchase_tblsupplier">
+            <End Role="tblsupplier" EntitySet="tblsupplier" />
+            <End Role="tblpurchase" EntitySet="tblpurchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbluser_tblrole" Association="Self.FK_tbluser_tblrole">
+            <End Role="tblrole" EntitySet="tblrole" />
+            <End Role="tbluser" EntitySet="tbluser" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LissystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblanalytic">
+          <Key>
+            <PropertyRef Name="analyticid" />
+          </Key>
+          <Property Name="analyticid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="diagnosisitem" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="value" Type="Double" />
+          <Property Name="minvalue" Type="Double" />
+          <Property Name="maxvalue" Type="Double" />
+          <Property Name="measurementunit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblpatienttestresults" Relationship="Self.FK__tblpatien__analy__5629CD9C" FromRole="tblanalytics" ToRole="tblpatienttestresult" />
+        </EntityType>
+        <EntityType Name="tblbill">
+          <Key>
+            <PropertyRef Name="billid" />
+          </Key>
+          <Property Name="billid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientid" Type="Int32" />
+          <Property Name="totalprice" Type="Double" />
+          <Property Name="generateddate" Type="DateTime" Precision="0" />
+          <Property Name="recordid" Type="Int32" />
+          <NavigationProperty Name="tblrecord" Relationship="Self.FK__tblbill__recordi__5165187F" FromRole="tblbill" ToRole="tblrecord" />
+          <NavigationProperty Name="tblpatient" Relationship="Self.FK_bill_patient" FromRole="tblbill" ToRole="tblpatient" />
+        </EntityType>
+        <EntityType Name="tblcollector">
+          <Key>
+            <PropertyRef Name="collectorid" />
+          </Key>
+          <Property Name="collectorid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="collectorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="collectoremail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="collectorphno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblrecords" Relationship="Self.FK__tblrecord__colle__5CD6CB2B" FromRole="tblcollector" ToRole="tblrecord" />
+        </EntityType>
+        <EntityType Name="tbldoctor">
+          <Key>
+            <PropertyRef Name="doctorid" />
+          </Key>
+          <Property Name="doctorid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="doctorname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doctormoblienumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doctoremail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblrecords" Relationship="Self.FK__tblrecord__docto__5BE2A6F2" FromRole="tbldoctor" ToRole="tblrecord" />
+        </EntityType>
+        <EntityType Name="tblequipement">
+          <Key>
+            <PropertyRef Name="equipementid" />
+          </Key>
+          <Property Name="equipementid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="equipementname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Int64" />
+          <Property Name="price" Type="Int64" />
+          <NavigationProperty Name="tblorders" Relationship="Self.FK_tblorder_tblequipement" FromRole="tblequipement" ToRole="tblorder" />
+          <NavigationProperty Name="tblpurchases" Relationship="Self.FK_tblpurchase_tblequipement" FromRole="tblequipement" ToRole="tblpurchase" />
+        </EntityType>
+        <EntityType Name="tblmachine">
+          <Key>
+            <PropertyRef Name="machineid" />
+          </Key>
+          <Property Name="machineid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="machinename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="template" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblorder">
+          <Key>
+            <PropertyRef Name="orderid" />
+          </Key>
+          <Property Name="orderid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientid" Type="Int32" />
+          <Property Name="equipementid" Type="Int32" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="quantity" Type="Int64" />
+          <Property Name="totalprice" Type="Int64" />
+          <NavigationProperty Name="tblequipement" Relationship="Self.FK_tblorder_tblequipement" FromRole="tblorder" ToRole="tblequipement" />
+          <NavigationProperty Name="tblpatient" Relationship="Self.FK_tblorder_tblpatient" FromRole="tblorder" ToRole="tblpatient" />
+        </EntityType>
+        <EntityType Name="tblpatient">
+          <Key>
+            <PropertyRef Name="patientid" />
+          </Key>
+          <Property Name="patientid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientfirstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="patientmiddelname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="patientlastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="patientdob" Type="DateTime" Precision="0" />
+          <Property Name="patientmaritalstatus" Type="Boolean" />
+          <Property Name="patientemail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="patientmobllienumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="patientemergencynumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created" Type="DateTime" Precision="3" />
+          <Property Name="updated" Type="DateTime" Precision="3" />
+          <Property Name="HL7" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblbills" Relationship="Self.FK_bill_patient" FromRole="tblpatient" ToRole="tblbill" />
+          <NavigationProperty Name="tblorders" Relationship="Self.FK_tblorder_tblpatient" FromRole="tblpatient" ToRole="tblorder" />
+          <NavigationProperty Name="tblpatienttestresults" Relationship="Self.FK__tblpatien__patie__571DF1D5" FromRole="tblpatient" ToRole="tblpatienttestresult" />
+          <NavigationProperty Name="tblrecords" Relationship="Self.FK__tblrecord__patie__5AEE82B9" FromRole="tblpatient" ToRole="tblrecord" />
+        </EntityType>
+        <EntityType Name="tblpatienttestresult">
+          <Key>
+            <PropertyRef Name="patienttestresultid" />
+          </Key>
+          <Property Name="patienttestresultid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="recordid" Type="Int32" />
+          <Property Name="patientid" Type="Int32" />
+          <Property Name="testid" Type="Int32" />
+          <Property Name="analyticid" Type="Int32" />
+          <Property Name="reading" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblanalytic" Relationship="Self.FK__tblpatien__analy__5629CD9C" FromRole="tblpatienttestresult" ToRole="tblanalytics" />
+          <NavigationProperty Name="tblpatient" Relationship="Self.FK__tblpatien__patie__571DF1D5" FromRole="tblpatienttestresult" ToRole="tblpatient" />
+          <NavigationProperty Name="tblrecord" Relationship="Self.FK__tblpatien__recor__5812160E" FromRole="tblpatienttestresult" ToRole="tblrecord" />
+          <NavigationProperty Name="tbltestmaster" Relationship="Self.FK__tblpatien__testi__5535A963" FromRole="tblpatienttestresult" ToRole="tbltestmaster" />
+        </EntityType>
+        <EntityType Name="tblpurchase">
+          <Key>
+            <PropertyRef Name="purchaseid" />
+          </Key>
+          <Property Name="purchaseid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="equipementid" Type="Int32" />
+          <Property Name="supplierid" Type="Int32" />
+          <Property Name="quantity" Type="Int64" />
+          <Property Name="purchaseprice" Type="Int64" />
+          <Property Name="purchasedate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblequipement" Relationship="Self.FK_tblpurchase_tblequipement" FromRole="tblpurchase" ToRole="tblequipement" />
+          <NavigationProperty Name="tblsupplier" Relationship="Self.FK_tblpurchase_tblsupplier" FromRole="tblpurchase" ToRole="tblsupplier" />
+        </EntityType>
+        <EntityType Name="tblrecord">
+          <Key>
+            <PropertyRef Name="recordid" />
+          </Key>
+          <Property Name="recordid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patientid" Type="Int32" />
+          <Property Name="doctorid" Type="Int32" />
+          <Property Name="collectorid" Type="Int32" />
+          <Property Name="samplenumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="testid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="priority" Type="Boolean" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="tblbills" Relationship="Self.FK__tblbill__recordi__5165187F" FromRole="tblrecord" ToRole="tblbill" />
+          <NavigationProperty Name="tblcollector" Relationship="Self.FK__tblrecord__colle__5CD6CB2B" FromRole="tblrecord" ToRole="tblcollector" />
+          <NavigationProperty Name="tbldoctor" Relationship="Self.FK__tblrecord__docto__5BE2A6F2" FromRole="tblrecord" ToRole="tbldoctor" />
+          <NavigationProperty Name="tblpatient" Relationship="Self.FK__tblrecord__patie__5AEE82B9" FromRole="tblrecord" ToRole="tblpatient" />
+          <NavigationProperty Name="tblpatienttestresults" Relationship="Self.FK__tblpatien__recor__5812160E" FromRole="tblrecord" ToRole="tblpatienttestresult" />
+        </EntityType>
+        <EntityType Name="tblrole">
+          <Key>
+            <PropertyRef Name="roleid" />
+          </Key>
+          <Property Name="roleid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rolename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="createdby" Type="Int32" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblusers" Relationship="Self.FK_tbluser_tblrole" FromRole="tblrole" ToRole="tbluser" />
+        </EntityType>
+        <EntityType Name="tblsupplier">
+          <Key>
+            <PropertyRef Name="supplierid" />
+          </Key>
+          <Property Name="supplierid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="suppliername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="suppliermoblienumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="supplieremail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="supplieraddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblpurchases" Relationship="Self.FK_tblpurchase_tblsupplier" FromRole="tblsupplier" ToRole="tblpurchase" />
+        </EntityType>
+        <EntityType Name="tbltestmaster">
+          <Key>
+            <PropertyRef Name="testid" />
+          </Key>
+          <Property Name="testid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="testname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="testprice" Type="Double" />
+          <Property Name="analyticlist" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblpatienttestresults" Relationship="Self.FK__tblpatien__testi__5535A963" FromRole="tbltestmaster" ToRole="tblpatienttestresult" />
+        </EntityType>
+        <EntityType Name="tbluser">
+          <Key>
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="userid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mobileno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isactive" Type="Boolean" />
+          <Property Name="roleid" Type="Int32" />
+          <NavigationProperty Name="tblrole" Relationship="Self.FK_tbluser_tblrole" FromRole="tbluser" ToRole="tblrole" />
+        </EntityType>
+        <Association Name="FK__tblpatien__analy__5629CD9C">
+          <End Role="tblanalytics" Type="Self.tblanalytic" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblpatienttestresult" Type="Self.tblpatienttestresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblanalytics">
+              <PropertyRef Name="analyticid" />
+            </Principal>
+            <Dependent Role="tblpatienttestresult">
+              <PropertyRef Name="analyticid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblbill__recordi__5165187F">
+          <End Role="tblrecord" Type="Self.tblrecord" Multiplicity="0..1" />
+          <End Role="tblbill" Type="Self.tblbill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblrecord">
+              <PropertyRef Name="recordid" />
+            </Principal>
+            <Dependent Role="tblbill">
+              <PropertyRef Name="recordid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bill_patient">
+          <End Role="tblpatient" Type="Self.tblpatient" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblbill" Type="Self.tblbill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblpatient">
+              <PropertyRef Name="patientid" />
+            </Principal>
+            <Dependent Role="tblbill">
+              <PropertyRef Name="patientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblrecord__colle__5CD6CB2B">
+          <End Role="tblcollector" Type="Self.tblcollector" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblrecord" Type="Self.tblrecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblcollector">
+              <PropertyRef Name="collectorid" />
+            </Principal>
+            <Dependent Role="tblrecord">
+              <PropertyRef Name="collectorid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblrecord__docto__5BE2A6F2">
+          <End Role="tbldoctor" Type="Self.tbldoctor" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblrecord" Type="Self.tblrecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbldoctor">
+              <PropertyRef Name="doctorid" />
+            </Principal>
+            <Dependent Role="tblrecord">
+              <PropertyRef Name="doctorid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorder_tblequipement">
+          <End Role="tblequipement" Type="Self.tblequipement" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblorder" Type="Self.tblorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblequipement">
+              <PropertyRef Name="equipementid" />
+            </Principal>
+            <Dependent Role="tblorder">
+              <PropertyRef Name="equipementid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblpurchase_tblequipement">
+          <End Role="tblequipement" Type="Self.tblequipement" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblpurchase" Type="Self.tblpurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblequipement">
+              <PropertyRef Name="equipementid" />
+            </Principal>
+            <Dependent Role="tblpurchase">
+              <PropertyRef Name="equipementid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblorder_tblpatient">
+          <End Role="tblpatient" Type="Self.tblpatient" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblorder" Type="Self.tblorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblpatient">
+              <PropertyRef Name="patientid" />
+            </Principal>
+            <Dependent Role="tblorder">
+              <PropertyRef Name="patientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblpatien__patie__571DF1D5">
+          <End Role="tblpatient" Type="Self.tblpatient" Multiplicity="0..1" />
+          <End Role="tblpatienttestresult" Type="Self.tblpatienttestresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblpatient">
+              <PropertyRef Name="patientid" />
+            </Principal>
+            <Dependent Role="tblpatienttestresult">
+              <PropertyRef Name="patientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblrecord__patie__5AEE82B9">
+          <End Role="tblpatient" Type="Self.tblpatient" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblrecord" Type="Self.tblrecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblpatient">
+              <PropertyRef Name="patientid" />
+            </Principal>
+            <Dependent Role="tblrecord">
+              <PropertyRef Name="patientid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblpatien__recor__5812160E">
+          <End Role="tblrecord" Type="Self.tblrecord" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblpatienttestresult" Type="Self.tblpatienttestresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblrecord">
+              <PropertyRef Name="recordid" />
+            </Principal>
+            <Dependent Role="tblpatienttestresult">
+              <PropertyRef Name="recordid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblpatien__testi__5535A963">
+          <End Role="tbltestmaster" Type="Self.tbltestmaster" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblpatienttestresult" Type="Self.tblpatienttestresult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbltestmaster">
+              <PropertyRef Name="testid" />
+            </Principal>
+            <Dependent Role="tblpatienttestresult">
+              <PropertyRef Name="testid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblpurchase_tblsupplier">
+          <End Role="tblsupplier" Type="Self.tblsupplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tblpurchase" Type="Self.tblpurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblsupplier">
+              <PropertyRef Name="supplierid" />
+            </Principal>
+            <Dependent Role="tblpurchase">
+              <PropertyRef Name="supplierid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbluser_tblrole">
+          <End Role="tblrole" Type="Self.tblrole" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="tbluser" Type="Self.tbluser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblrole">
+              <PropertyRef Name="roleid" />
+            </Principal>
+            <Dependent Role="tbluser">
+              <PropertyRef Name="roleid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LissystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblanalytics" EntityType="Self.tblanalytic" />
+          <EntitySet Name="tblbills" EntityType="Self.tblbill" />
+          <EntitySet Name="tblcollectors" EntityType="Self.tblcollector" />
+          <EntitySet Name="tbldoctors" EntityType="Self.tbldoctor" />
+          <EntitySet Name="tblequipements" EntityType="Self.tblequipement" />
+          <EntitySet Name="tblmachines" EntityType="Self.tblmachine" />
+          <EntitySet Name="tblorders" EntityType="Self.tblorder" />
+          <EntitySet Name="tblpatients" EntityType="Self.tblpatient" />
+          <EntitySet Name="tblpatienttestresults" EntityType="Self.tblpatienttestresult" />
+          <EntitySet Name="tblpurchases" EntityType="Self.tblpurchase" />
+          <EntitySet Name="tblrecords" EntityType="Self.tblrecord" />
+          <EntitySet Name="tblroles" EntityType="Self.tblrole" />
+          <EntitySet Name="tblsuppliers" EntityType="Self.tblsupplier" />
+          <EntitySet Name="tbltestmasters" EntityType="Self.tbltestmaster" />
+          <EntitySet Name="tblusers" EntityType="Self.tbluser" />
+          <AssociationSet Name="FK__tblpatien__analy__5629CD9C" Association="Self.FK__tblpatien__analy__5629CD9C">
+            <End Role="tblanalytics" EntitySet="tblanalytics" />
+            <End Role="tblpatienttestresult" EntitySet="tblpatienttestresults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblbill__recordi__5165187F" Association="Self.FK__tblbill__recordi__5165187F">
+            <End Role="tblrecord" EntitySet="tblrecords" />
+            <End Role="tblbill" EntitySet="tblbills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bill_patient" Association="Self.FK_bill_patient">
+            <End Role="tblpatient" EntitySet="tblpatients" />
+            <End Role="tblbill" EntitySet="tblbills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblrecord__colle__5CD6CB2B" Association="Self.FK__tblrecord__colle__5CD6CB2B">
+            <End Role="tblcollector" EntitySet="tblcollectors" />
+            <End Role="tblrecord" EntitySet="tblrecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblrecord__docto__5BE2A6F2" Association="Self.FK__tblrecord__docto__5BE2A6F2">
+            <End Role="tbldoctor" EntitySet="tbldoctors" />
+            <End Role="tblrecord" EntitySet="tblrecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorder_tblequipement" Association="Self.FK_tblorder_tblequipement">
+            <End Role="tblequipement" EntitySet="tblequipements" />
+            <End Role="tblorder" EntitySet="tblorders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblpurchase_tblequipement" Association="Self.FK_tblpurchase_tblequipement">
+            <End Role="tblequipement" EntitySet="tblequipements" />
+            <End Role="tblpurchase" EntitySet="tblpurchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblorder_tblpatient" Association="Self.FK_tblorder_tblpatient">
+            <End Role="tblpatient" EntitySet="tblpatients" />
+            <End Role="tblorder" EntitySet="tblorders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblpatien__patie__571DF1D5" Association="Self.FK__tblpatien__patie__571DF1D5">
+            <End Role="tblpatient" EntitySet="tblpatients" />
+            <End Role="tblpatienttestresult" EntitySet="tblpatienttestresults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblrecord__patie__5AEE82B9" Association="Self.FK__tblrecord__patie__5AEE82B9">
+            <End Role="tblpatient" EntitySet="tblpatients" />
+            <End Role="tblrecord" EntitySet="tblrecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblpatien__recor__5812160E" Association="Self.FK__tblpatien__recor__5812160E">
+            <End Role="tblrecord" EntitySet="tblrecords" />
+            <End Role="tblpatienttestresult" EntitySet="tblpatienttestresults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblpatien__testi__5535A963" Association="Self.FK__tblpatien__testi__5535A963">
+            <End Role="tbltestmaster" EntitySet="tbltestmasters" />
+            <End Role="tblpatienttestresult" EntitySet="tblpatienttestresults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblpurchase_tblsupplier" Association="Self.FK_tblpurchase_tblsupplier">
+            <End Role="tblsupplier" EntitySet="tblsuppliers" />
+            <End Role="tblpurchase" EntitySet="tblpurchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbluser_tblrole" Association="Self.FK_tbluser_tblrole">
+            <End Role="tblrole" EntitySet="tblroles" />
+            <End Role="tbluser" EntitySet="tblusers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LissystemModelStoreContainer" CdmEntityContainer="LissystemEntities">
+          <EntitySetMapping Name="tblanalytics">
+            <EntityTypeMapping TypeName="LissystemModel.tblanalytic">
+              <MappingFragment StoreEntitySet="tblanalytics">
+                <ScalarProperty Name="analyticid" ColumnName="analyticid" />
+                <ScalarProperty Name="diagnosisitem" ColumnName="diagnosisitem" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="minvalue" ColumnName="minvalue" />
+                <ScalarProperty Name="maxvalue" ColumnName="maxvalue" />
+                <ScalarProperty Name="measurementunit" ColumnName="measurementunit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblbills">
+            <EntityTypeMapping TypeName="LissystemModel.tblbill">
+              <MappingFragment StoreEntitySet="tblbill">
+                <ScalarProperty Name="billid" ColumnName="billid" />
+                <ScalarProperty Name="patientid" ColumnName="patientid" />
+                <ScalarProperty Name="totalprice" ColumnName="totalprice" />
+                <ScalarProperty Name="generateddate" ColumnName="generateddate" />
+                <ScalarProperty Name="recordid" ColumnName="recordid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblcollectors">
+            <EntityTypeMapping TypeName="LissystemModel.tblcollector">
+              <MappingFragment StoreEntitySet="tblcollector">
+                <ScalarProperty Name="collectorid" ColumnName="collectorid" />
+                <ScalarProperty Name="collectorname" ColumnName="collectorname" />
+                <ScalarProperty Name="collectoremail" ColumnName="collectoremail" />
+                <ScalarProperty Name="collectorphno" ColumnName="collectorphno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbldoctors">
+            <EntityTypeMapping TypeName="LissystemModel.tbldoctor">
+              <MappingFragment StoreEntitySet="tbldoctor">
+                <ScalarProperty Name="doctorid" ColumnName="doctorid" />
+                <ScalarProperty Name="doctorname" ColumnName="doctorname" />
+                <ScalarProperty Name="doctormoblienumber" ColumnName="doctormoblienumber" />
+                <ScalarProperty Name="designation" ColumnName="designation" />
+                <ScalarProperty Name="doctoremail" ColumnName="doctoremail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblequipements">
+            <EntityTypeMapping TypeName="LissystemModel.tblequipement">
+              <MappingFragment StoreEntitySet="tblequipement">
+                <ScalarProperty Name="equipementid" ColumnName="equipementid" />
+                <ScalarProperty Name="equipementname" ColumnName="equipementname" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblmachines">
+            <EntityTypeMapping TypeName="LissystemModel.tblmachine">
+              <MappingFragment StoreEntitySet="tblmachine">
+                <ScalarProperty Name="machineid" ColumnName="machineid" />
+                <ScalarProperty Name="machinename" ColumnName="machinename" />
+                <ScalarProperty Name="template" ColumnName="template" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblorders">
+            <EntityTypeMapping TypeName="LissystemModel.tblorder">
+              <MappingFragment StoreEntitySet="tblorder">
+                <ScalarProperty Name="orderid" ColumnName="orderid" />
+                <ScalarProperty Name="patientid" ColumnName="patientid" />
+                <ScalarProperty Name="equipementid" ColumnName="equipementid" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="totalprice" ColumnName="totalprice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblpatients">
+            <EntityTypeMapping TypeName="LissystemModel.tblpatient">
+              <MappingFragment StoreEntitySet="tblpatient">
+                <ScalarProperty Name="patientid" ColumnName="patientid" />
+                <ScalarProperty Name="patientfirstname" ColumnName="patientfirstname" />
+                <ScalarProperty Name="patientmiddelname" ColumnName="patientmiddelname" />
+                <ScalarProperty Name="patientlastname" ColumnName="patientlastname" />
+                <ScalarProperty Name="patientdob" ColumnName="patientdob" />
+                <ScalarProperty Name="patientmaritalstatus" ColumnName="patientmaritalstatus" />
+                <ScalarProperty Name="patientemail" ColumnName="patientemail" />
+                <ScalarProperty Name="patientmobllienumber" ColumnName="patientmobllienumber" />
+                <ScalarProperty Name="patientemergencynumber" ColumnName="patientemergencynumber" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="updated" ColumnName="updated" />
+                <ScalarProperty Name="HL7" ColumnName="HL7" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblpatienttestresults">
+            <EntityTypeMapping TypeName="LissystemModel.tblpatienttestresult">
+              <MappingFragment StoreEntitySet="tblpatienttestresult">
+                <ScalarProperty Name="patienttestresultid" ColumnName="patienttestresultid" />
+                <ScalarProperty Name="recordid" ColumnName="recordid" />
+                <ScalarProperty Name="patientid" ColumnName="patientid" />
+                <ScalarProperty Name="testid" ColumnName="testid" />
+                <ScalarProperty Name="analyticid" ColumnName="analyticid" />
+                <ScalarProperty Name="reading" ColumnName="reading" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblpurchases">
+            <EntityTypeMapping TypeName="LissystemModel.tblpurchase">
+              <MappingFragment StoreEntitySet="tblpurchase">
+                <ScalarProperty Name="purchaseid" ColumnName="purchaseid" />
+                <ScalarProperty Name="equipementid" ColumnName="equipementid" />
+                <ScalarProperty Name="supplierid" ColumnName="supplierid" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="purchaseprice" ColumnName="purchaseprice" />
+                <ScalarProperty Name="purchasedate" ColumnName="purchasedate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblrecords">
+            <EntityTypeMapping TypeName="LissystemModel.tblrecord">
+              <MappingFragment StoreEntitySet="tblrecord">
+                <ScalarProperty Name="recordid" ColumnName="recordid" />
+                <ScalarProperty Name="patientid" ColumnName="patientid" />
+                <ScalarProperty Name="doctorid" ColumnName="doctorid" />
+                <ScalarProperty Name="collectorid" ColumnName="collectorid" />
+                <ScalarProperty Name="samplenumber" ColumnName="samplenumber" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="testid" ColumnName="testid" />
+                <ScalarProperty Name="priority" ColumnName="priority" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblroles">
+            <EntityTypeMapping TypeName="LissystemModel.tblrole">
+              <MappingFragment StoreEntitySet="tblrole">
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+                <ScalarProperty Name="rolename" ColumnName="rolename" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblsuppliers">
+            <EntityTypeMapping TypeName="LissystemModel.tblsupplier">
+              <MappingFragment StoreEntitySet="tblsupplier">
+                <ScalarProperty Name="supplierid" ColumnName="supplierid" />
+                <ScalarProperty Name="suppliername" ColumnName="suppliername" />
+                <ScalarProperty Name="suppliermoblienumber" ColumnName="suppliermoblienumber" />
+                <ScalarProperty Name="supplieremail" ColumnName="supplieremail" />
+                <ScalarProperty Name="supplieraddress" ColumnName="supplieraddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbltestmasters">
+            <EntityTypeMapping TypeName="LissystemModel.tbltestmaster">
+              <MappingFragment StoreEntitySet="tbltestmaster">
+                <ScalarProperty Name="testid" ColumnName="testid" />
+                <ScalarProperty Name="testname" ColumnName="testname" />
+                <ScalarProperty Name="testprice" ColumnName="testprice" />
+                <ScalarProperty Name="analyticlist" ColumnName="analyticlist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblusers">
+            <EntityTypeMapping TypeName="LissystemModel.tbluser">
+              <MappingFragment StoreEntitySet="tbluser">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="mobileno" ColumnName="mobileno" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+                <ScalarProperty Name="roleid" ColumnName="roleid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

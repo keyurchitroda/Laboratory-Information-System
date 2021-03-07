@@ -1,0 +1,59 @@
+﻿@model LIS.Model.Models.tblequipement
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center><h5 class="modal-title" id="exampleModalLongTitle">Equipement Details</h5></center>
+
+            </div>
+            <div class="modal-body">
+                <div>
+
+
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Equipement Name
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.equipementname)
+                        </dd>
+                        <hr>
+                        <dt>
+                            Quantity
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.quantity)
+                        </dd>
+
+
+
+                    </dl>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a href="@Url.Action("Index")" class="btn btn-sm btn-info right">
+                    <i class="fa fa-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function(){
+        jQuery("#exampleModalCenter").modal('show');
+	});
+</script>
+

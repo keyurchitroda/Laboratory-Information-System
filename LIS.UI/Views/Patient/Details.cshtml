@@ -1,0 +1,120 @@
+﻿@model LIS.Model.Models.tblpatient
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center><h4 class="modal-title" id="exampleModalLongTitle">Patient Details</h4></center>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.patientfirstname)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.patientfirstname)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.patientmiddelname)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.patientmiddelname)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.patientlastname)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.patientlastname)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.patientdob)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.patientdob)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.patientmaritalstatus)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.patientmaritalstatus)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.patientemail)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.patientemail)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.patientmobllienumber)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.patientmobllienumber)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.patientemergencynumber)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.patientemergencynumber)
+                        </dd>
+
+                        @*<dt>
+                                @Html.DisplayNameFor(model => model.created)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.created)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.updated)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.updated)
+                            </dd>*@
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.HL7)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.HL7)
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="@Url.Action("Edit","Patient",new { id = Model.patientid })" class="btn btn-sm btn-warning">
+                    <i class="fa fa-pencil"></i>Edit
+                </a>
+                <a href="@Url.Action("Index")" class="btn btn-sm btn-info right">
+                    <i class="fa fa-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#exampleModalCenter").modal('show');
+    });
+</script>

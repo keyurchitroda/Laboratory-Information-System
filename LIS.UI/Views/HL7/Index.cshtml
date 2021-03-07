@@ -1,0 +1,143 @@
+﻿
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@3.10.0/index.min.js"></script>
+
+<h2>HL7</h2>
+
+<form id="hl7form">
+    <textarea id="hl7input" cols="130" rows="15">
+MSH|^~\&|LAB|MYFAC|LAB||201411130917||ORU^R01|3216598|D|2.3|||AL|NE|
+PID|1|ABC123DF|AND234DA_PID3|PID_4_ALTID|Patlast^Patfirst^Mid||19670202|F|||4505 21 st^^LAKE COUNTRY^BC^V4V 2S7||222-555-8484|||||MF0050356/15|
+PV1|1|O|MYFACSOMPL||||^Xavarie^Sonna^^^^^XAVS|||||||||||REF||SELF|||||||||||||||||||MYFAC||REG|||201411071440||||||||23390^PV1_52Surname^PV1_52Given^H^^Dr^^PV1_52Mnemonic|
+ORC|RE|PT103933301.0100|||CM|N|||201411130917|^Kyle^Andra^J.^^^^KYLA||^Xavarie^Sonna^^^^^XAVS|MYFAC|
+OBR|1|PT1311:H00001R301.0100|PT1311:H00001R|301.0100^Complete Blood Count (CBC)^00065227^57021-8^CBC \T\ Auto Differential^pCLOCD|R||201411130914|||KYLA||||201411130914||^Xavarie^Sonna^^^^^XAVS||00065227||||201411130915||LAB|F||^^^^^R|^Xavarie^Sonna^^^^^XAVS|
+OBX|1|NM|301.0500^White Blood Count (WBC)^00065227^6690-2^Leukocytes^pCLOCD|1|10.1|10\S\9/L|3.1-9.7|H||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|2|NM|301.0600^Red Blood Count (RBC)^00065227^789-8^Erythrocytes^pCLOCD|1|3.2|10\S\12/L|3.7-5.0|L||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|3|NM|301.0700^Hemoglobin (HGB)^00065227^718-7^Hemoglobin^pCLOCD|1|140|g/L|118-151|N||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|4|NM|301.0900^Hematocrit (HCT)^00065227^4544-3^Hematocrit^pCLOCD|1|0.34|L/L|0.33-0.45|N||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|5|NM|301.1100^MCV^00065227^787-2^Mean Corpuscular Volume^pCLOCD|1|98.0|fL|84.0-98.0|N||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|6|NM|301.1300^MCH^00065227^785-6^Mean Corpuscular Hemoglobin^pCLOCD|1|27.0|pg|28.3-33.5|L||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|7|NM|301.1500^MCHC^00065227^786-4^Mean Corpuscular Hemoglobin Concentration^pCLOCD|1|330|g/L|329-352|N||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|8|NM|301.1700^RDW^00065227^788-0^Erythrocyte Distribution Width^pCLOCD|1|12.0|%|12.0-15.0|N||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|9|NM|301.1900^Platelets^00065227^777-3^Platelets^pCLOCD|1|125|10\S\9/L|147-375|L||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|10|NM|301.2100^Neutrophils^00065227^751-8^Neutrophils^pCLOCD|1|8.0|10\S\9/L|1.2-6.0|H||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|11|NM|301.2300^Lymphocytes^00065227^731-0^Lymphocytes^pCLOCD|1|1.0|10\S\9/L|0.6-3.1|N||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|12|NM|301.2500^Monocytes^00065227^742-7^Monocytes^pCLOCD|1|1.0|10\S\9/L|0.1-0.9|H||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|13|NM|301.2700^Eosinophils^00065227^711-2^Eosinophils^pCLOCD|1|0.0|10\S\9/L|0.0-0.5|N||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+OBX|14|NM|301.2900^Basophils^00065227^704-7^Basophils^pCLOCD|1|0.0|10\S\9/L|0.0-0.2|N||A~S|F|||201411130916|MYFAC^MyFake Hospital^L|
+ZDR||^Xavarie^Sonna^^^^^XAVS^^^^^XX^^ATP|
+ZPR||
+        </textarea> <br />
+    <input type="submit" value="Parse" class="btn btn-success" />
+    <input type="reset" value="Clear" class="btn btn-danger" />
+</form>
+<br/>
+<pre id="parsedMsg"></pre>
+<script>
+
+    $(document).ready(function () {
+        $('#hl7form').on('submit', function (e) {
+            e.preventDefault();
+            var hl7InputValue = $('#hl7input').val();
+            if (hl7InputValue != "") {
+                var op = parse(hl7InputValue);
+                // console.log(op);
+                MSHParser(op[0]); // MSG Header Array
+                PIDParser(op[1]); // PID Parser
+                PV1Parser(op[2]); // PV1 Parser
+                ORCParser(op[3]); // ORC Parser
+                OBRParser(op[4]); // OBR Parser
+                document.getElementById('parsedMsg').innerHTML += `<b>OBX values</b>\n\n`;
+                for (var i = 0; i < op.length; i++) {
+                    if (op[i][0] == "OBX") {
+                        OBXParser(op[i]);
+                    }
+                }
+                //OBX Parser
+            } else {
+                alert("No value found")
+            }
+        })
+    })
+
+    function parse(str) {
+        var segments = str.split('\n');
+        return _.map(segments, function (segment) {
+            var fields = segment.split('|');
+            return _.map(fields, function (field) {
+                return _.contains(field, '^') ? field.split('^') : field;
+            });
+        });
+    }
+
+    function MSHParser(output) {
+        var MSHOutput = `<b>Message Header</b>\n`;
+        MSHOutput += `App: ${output[2]} \n`;
+        MSHOutput += `Facility: ${output[3]}\n`;
+        MSHOutput += `Msg Time: ${new Date(parseInt(output[6]) * 1000).toLocaleString()}\n`;
+        MSHOutput += `Control ID: ${output[9]}\n`;
+        MSHOutput += `Type: ${output[8][0] + '_' + output[8][1]}\n`;
+        MSHOutput += `Version: ${output[11]}\n\n`;
+        document.getElementById('parsedMsg').innerHTML = MSHOutput;
+    }
+
+    function PIDParser(output) {
+        var outputPatientInfo = `<b>Patient Information</b>\n`;
+        outputPatientInfo += `Account #: ${output[18]} \n`;
+        outputPatientInfo += `ID: ${output[2] + ',' + output[3]}\n`;
+        outputPatientInfo += `PHN: ${output[4]}\n`;
+        outputPatientInfo += `Sex: ${output[8]}\n`;
+        outputPatientInfo += `Name: ${output[5][0]} ${output[5][1]} ${output[5][2]}\n`;
+        outputPatientInfo += `DOB: ${new Date(parseInt(output[7]) * 1000).toLocaleDateString()}\n`;
+        outputPatientInfo += `Address: ${output[11][0]} ${output[11][1]} ${output[11][2]} ${output[11][3]} ${output[11][4]}\n`;
+        outputPatientInfo += `Phone: ${output[13]}\n\n`;
+        document.getElementById('parsedMsg').innerHTML += outputPatientInfo;
+    }
+
+    function PV1Parser(output) {
+        var outputPatientInfo = `<b>Visit Information</b>\n`;
+        outputPatientInfo += `Admit Date: ${new Date(parseInt(output[44]) * 1000).toLocaleDateString()} \n`;
+        outputPatientInfo += `Location: ${output[3]}\n`;
+        outputPatientInfo += `Servicing Facility: ${output[41]} ${output[18]}\n`;
+        outputPatientInfo += `Account Type: ${output[41]} ${output[18]} ${output[2]}\n`;
+        outputPatientInfo += `Attending Provider: ${output[7][0]} ${output[7][1]} ${output[7][2]}\n`;
+        outputPatientInfo += `Other Provider: ${output[52][0]} ${output[52][1]} ${output[52][2]} ${output[52][3]} ${output[52][5]} ${output[52][7]} \n\n`;
+        document.getElementById('parsedMsg').innerHTML += outputPatientInfo;
+    }
+
+    function ORCParser(output) {
+        var ORCOutput = `<b>Order Common Information</b>\n`;
+        ORCOutput += `Order Date: ${new Date(parseInt(output[9]) * 1000).toLocaleDateString()} \n`;
+        ORCOutput += `Order ID: ${output[2]} \n`;
+        ORCOutput += `Order Status: ${output[5]} \n`;
+        ORCOutput += `Response Flag: ${output[6]} \n`;
+        ORCOutput += `Entered By: ${output[10][1]} ${output[10][2]} ${output[10][3]} CUSTOM ID : ${output[10][7]} \n`;
+        ORCOutput += `Entered At: ${output[13][0]} \n`;
+        ORCOutput += `Ordered By: ${output[12][1]} ${output[12][2]} CUSTOM ID : ${output[12][7]} \n\n`;
+        document.getElementById('parsedMsg').innerHTML += ORCOutput;
+    }
+
+    function OBRParser(output) {
+        var OBROutPut = `<b>Order Observation Request Information</b>\n`;
+        OBROutPut += `Specimen: ${output[3]} \n`;
+        OBROutPut += `Service: ${output[24]} \n`;
+        OBROutPut += `Test Info: Test ID: ${output[4][0]} ${output[4][3]} Test Name: ${output[4][1]} ${output[4][4]} \n`;
+        OBROutPut += `Test Date/Time: ${new Date(parseInt(output[7]) * 1000).toLocaleDateString()} \n`;
+        OBROutPut += `Results Date/Time: ${new Date(parseInt(output[22]) * 1000).toLocaleDateString()} \n`;
+        OBROutPut += `Status: ${output[25]} \n`;
+        OBROutPut += `Copies To: ${output[16][1]} ${output[16][2]} ${output[16][7]} \n\n`;
+        document.getElementById('parsedMsg').innerHTML += OBROutPut;
+    }
+
+    function OBXParser(output) {
+        var OBXOutput = `Test ID: ${output[3][0]} ${output[3][3]} \n`;
+        OBXOutput += `Test Name: ${output[3][2]} ${output[3][1]} ${output[3][4]} \n`;
+        OBXOutput += `Units: ${output[6]} \n`;
+        OBXOutput += `Results: ${output[5]} Reference Range : ${output[7]} Abnoramal : ${output[8]}  \n`;
+        OBXOutput += `Status: ${output[11]} \n\n`;
+        document.getElementById('parsedMsg').innerHTML += OBXOutput;
+    }
+
+</script>

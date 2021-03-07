@@ -1,0 +1,98 @@
+﻿@model IEnumerable<LIS.Model.Models.tblrecord>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            Manage Record
+        </div>
+    </div>
+    <div class="card-body col-md-12">
+        <table id="tblrecord" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Patientfirst name
+                    </th>
+                    <th>
+                        Doctor name
+                    </th>
+                    <th>
+                        Collector name
+                    </th>
+                    <th>
+                        Sample number
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Test name
+                    </th>
+                    <th>
+                        Priority
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblpatient.patientfirstname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbldoctor.doctorname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblcollector.collectorname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.samplenumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.testid)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.priority)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.status)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit","Record",new { id = item.recordid })" class="btn btn-sm btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>|
+                            <a href="@Url.Action("Details","Record",new { id = item.recordid })" class="btn btn-sm btn-success">
+                                <i class="fa fa-eye"></i>
+                            </a>|
+                            <a href="@Url.Action("Delete","Record",new { id = item.recordid })" onclick="return confirm('Are you sure you wish to delete this record ?');" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>|
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        $('#tblrecord').DataTable();
+    });
+</script>
+
+

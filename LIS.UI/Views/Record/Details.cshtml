@@ -1,0 +1,122 @@
+﻿@model LIS.Model.Models.tblrecord
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <center><h4 class="modal-title" id="exampleModalLongTitle">Record Details</h4></center>
+                </div>
+
+                <div class="modal-body">
+                    <div>
+                        <dl class="dl-horizontal">
+                            @Html.HiddenFor(model => model.patientid)
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tblpatient.patientfirstname)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.tblpatient.patientfirstname)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tbldoctor.doctorname)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.tbldoctor.doctorname)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.tblcollector.collectorname)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.tblcollector.collectorname)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.samplenumber)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.samplenumber)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.date)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.date)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.testid)
+                            </dt>
+
+                            <dd>
+                                @*@Html.DisplayFor(model => model.testid)*@
+                                <div id="testdiv">
+
+                                </div>
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.priority)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.priority)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.status)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.status)
+                            </dd>
+
+                        </dl>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="@Url.Action("Edit","Record",new { id = Model.recordid })" class="btn btn-sm btn-warning">
+                        <i class="fa fa-pencil"></i>Edit
+                    </a>
+                    <a href="@Url.Action("Index")" class="btn btn-sm btn-info right">
+                        <i class="fa fa-arrow-left"></i> Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+    $(document).ready(function () {
+        jQuery("#exampleModalCenter").modal('show');
+
+        var patientid = $('#patientid').val();
+
+        $.ajax({
+            url: "/Patienttestresult/getTestFromPatientId/" + patientid,
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                for (var i = 0; i < result.length; i++) {
+                    var obj = result[i];
+                    html += `<span>${obj.testid} - ${obj.testname}</span><br/>`;
+                }
+                $('#testdiv').html(html);
+            },
+            error: function (errormessage) {
+
+            }
+        });
+    })
+</script>
+
