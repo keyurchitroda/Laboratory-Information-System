@@ -1,0 +1,83 @@
+﻿@model LIS.Model.Models.tblpurchase
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center><h5 class="modal-title" id="exampleModalLongTitle">Purchase Details</h5></center>
+
+            </div>
+            <div class="modal-body">
+                <div>
+
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Equipement Name
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.tblequipement.equipementname)
+                        </dd>
+                        <hr />
+                        <dt>
+                            Supplier Name
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.tblsupplier.suppliername)
+                        </dd>
+                        <hr />
+                        <dt>
+                            Quantity
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.quantity)
+                        </dd>
+                        <hr />
+                        <dt>
+                            Purchase Price
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.purchaseprice)
+                        </dd>
+                        <hr />
+                        <dt>
+                            Purchase Date
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.purchasedate)
+                        </dd>
+
+
+
+                    </dl>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a href="@Url.Action("Index")" class="btn btn-sm btn-info right">
+                    <i class="fa fa-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function(){
+        jQuery("#exampleModalCenter").modal('show');
+	});
+</script>

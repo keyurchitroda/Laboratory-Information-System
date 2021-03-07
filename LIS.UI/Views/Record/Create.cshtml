@@ -1,0 +1,206 @@
+﻿@model LIS.Model.Models.tblrecord
+
+<script>
+    //$(document).ready(function () {
+    //    $('#normaldropdown').chosen();
+    //});
+</script>
+
+<!--Header-->
+<div class="card card-body breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Add record</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li>
+                                <a href="@Url.Action("Index")" class="btn btn-sm btn-info right">
+                                    <i class="fa fa-arrow-left"></i> Back
+                                </a>
+                            </li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Header-->
+
+
+@using (Html.BeginForm(null,null, FormMethod.Post , new { id="myform" })) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+
+                    </div>
+                    <div class="card-body col-md-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            <label class="control-label col-md-5" for="patientid">patientfirst name</label> 
+                            <div class="col-md-10">
+                                @Html.DropDownList("patientid", ViewBag.list1 as SelectList, "-- Select patient --", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.patientid, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-10" for="doctorid">Doctor name
+                                <a href="@Url.Action("Create","Doctor")" style="float:right"><i class="menu-icon fa fa-user-plus"></i> Add doctor</a>
+                            </label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("doctorid", ViewBag.list2 as SelectList, "-- Select Dectorname --", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.doctorid, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-10" for="collectorid">Collector name
+                                <a href="@Url.Action("Create","Collector")" style="float:right"><i class="menu-icon fa fa-user-plus"></i> Add collector</a>
+                            </label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("collectorid", ViewBag.list3 as SelectList, "-- Select Collectorname --", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.collectorid, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="samplenumber">Sample number</label>
+                            <div class="col-md-10 d-flex">
+                                @Html.EditorFor(model => model.samplenumber, new { htmlAttributes = new { @class = "form-control", @id = "samplenumber" } })
+                                @Html.ValidationMessageFor(model => model.samplenumber, "", new { @class = "text-danger" })
+
+                                <button id="genSampleNumber" class="btn btn-success">Generate</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-5" for="date">Date</label>
+                            <div class="col-md-5">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.testid, "Test name", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.ListBoxFor(model => model.testid_Array, ViewBag.list4 as SelectList, new { @class = "select-chosen form-control", multiple = "multiple", id = "normaldropdown", selected = "true" })
+                                @Html.ValidationMessageFor(model => model.testid, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="priority">Priority</label>
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.priority)
+                                    @Html.ValidationMessageFor(model => model.priority, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="status">Status</label>
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.status)
+                                    @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-success" />
+                                <input type="reset" value="Cancel" class="btn btn-danger" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type='text/javascript'>
+
+    $(document).ready(function () {
+
+        //jQuery("#date").datepicker();
+        $('#normaldropdown').chosen();
+        
+        $('#genSampleNumber').on('click', function (e) {
+            e.preventDefault();
+            var date = new Date();
+            var timestamp = date.getTime();
+
+            $('#samplenumber').val(function () {
+                
+                if ($('#samplenumber').val() != "") {
+                    return $('#samplenumber').val() + ',' + timestamp;
+                } else {
+                    return timestamp;
+                }
+            });
+        })
+
+        $("#myform").validate({
+            rules: {
+                patientid:
+                {
+                    required: true,
+                },
+                doctorid:
+                {
+                    required: true,
+                },
+                collectorid:
+                {
+                    required: true,
+                },
+                samplenumber:
+                {
+                    required: true,
+                },
+                date:
+                {
+                    required: true,
+                },
+                normaldropdown:
+                {
+                    required: true,
+                },
+                priority:
+                {
+                    required: true,
+                },
+                status:
+                {
+                    required: true,
+                },
+            }
+        });  
+    })
+
+         
+</script>

@@ -1,0 +1,2 @@
+G:\LIS\LIS.Model\obj\Debug\LIS.Model.dll
+G:\LIS\LIS.Model\obj\Debug\LIS.Model.pdb

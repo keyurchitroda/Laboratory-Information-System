@@ -1,0 +1,56 @@
+﻿@model LIS.Model.Models.tblcollector
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center><h4 class="modal-title" id="exampleModalLongTitle">Collector Details</h4></center>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.collectorname)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.collectorname)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.collectoremail)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.collectoremail)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.collectorphno)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.collectorphno)
+                        </dd>
+
+                    </dl>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="@Url.Action("Edit","Collector",new { id = Model.collectorid })" class="btn btn-sm btn-warning">
+                    <i class="fa fa-pencil"></i>Edit
+                </a>
+                <a href="@Url.Action("Index")" class="btn btn-sm btn-info right">
+                    <i class="fa fa-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        jQuery(document).ready(function(){
+            jQuery("#exampleModalCenter").modal('show');
+        });
+</script>

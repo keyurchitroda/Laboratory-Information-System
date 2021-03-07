@@ -1,0 +1,187 @@
+﻿@model LIS.Model.Models.tblpatienttestresult
+
+<!--Header-->
+<div class="card card-body breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Add Patienttestresult</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li>
+                                <a href="@Url.Action("Index")" class="btn btn-sm btn-info right">
+                                    <i class="fa fa-arrow-left"></i> Back
+                                </a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Header-->
+
+
+@using (Html.BeginForm(null,null, FormMethod.Post , new { id="myform" })) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+
+                    </div>
+                    <div class="card-body col-md-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            <label class="control-label col-md-5" for="patientid">Patient Name</label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("patientid", ViewBag.list1 as SelectList, "-- Select patientname --", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.patientid, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-5" for="tid">Test Name</label>
+                            <div class="col-md-10">
+                                @*@Html.DropDownList("testid", ViewBag.list2 as SelectList, "-- Select testname --", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.testid, "", new { @class = "text-danger" })*@
+                                <select name="testid" id="testid" class="form-control">
+                                    <option value="" selected disabled>Select Test</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div id="loadform">
+
+
+                        </div>
+
+                        @*<div class="form-group">
+                            <label class="control-label col-md-2" for="analyticid">Diagnosis item</label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("analyticid", ViewBag.list3 as SelectList, "-- Select diagnosisitem --", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.analyticid, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                        @*<div class="form-group">
+                            <label class="control-label col-md-2" for="reading">Reading</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.reading, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.reading, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                        <div class="form-group">
+                            <label class="control-label col-md-5" for="date">Date</label>
+                            <div class="col-md-5">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control", @id = "date" } })
+                                    @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-success" />
+                                <input type="reset" value="Cancel" class="btn btn-danger" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        //jQuery("#date").datepicker();
+        $('#patientid').change(function () {
+            //getTestFromPatientId
+            $.ajax({
+                url: "/Patienttestresult/getTestFromPatientId/" + this.value,
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    var html = '<option value="Select Test" selected disabled>-- Select test --</option>';
+                    for (var i = 0; i < result.length; i++) {
+                        var obj = result[i];
+                        html += `<option value=${obj.testid}>${obj.testname}</option>`;
+                    }
+                    $('#testid').html(html);
+                },
+                error: function (errormessage) {
+                    
+                }
+            });
+        })
+
+        $('#testid').change(function () {
+            // GetAnalyticsFromTest
+            $.ajax({
+                url: "/Patienttestresult/GetAnalyticsFromTest/" + this.value,
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    var html = '';
+                    for (var i = 0; i < result.length; i++) {
+                        var obj = result[i];
+                        html += `
+                                <div class="form-group col-md-10">
+                                    <label>Diagnosis Item : ${obj.diagnosisitem} <br> Value :<span class="text-success">${obj.value}</span> | Min-Value :<span class="text-danger">${obj.minvalue}</span> | Max-Vaule :<span class="text-danger">${obj.maxvalue}</span> | measurementunit :${obj.measurementunit} </label>
+                                    <input type="hidden" name="[]analytic" value="${obj.analyticid}" />
+                                    <input type="text" name="[]reading" class="form-control" required />
+                                </div>
+                                `;
+                    }
+                    $('#loadform').html(html);
+                },
+                error: function (errormessage) {
+                    
+                }
+            });
+
+        })
+
+        $("#myform").validate({
+            rules: {
+                patientid:
+                {
+                    required: true,
+                },
+                testid:
+                {
+                    required: true,
+                },
+                //reading:
+                //{
+                //    required: true,
+                //},
+                date:
+                {
+                    required: true,
+                },
+                
+            }
+        });
+    })
+</script>

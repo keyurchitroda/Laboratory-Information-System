@@ -1,0 +1,192 @@
+﻿@model IEnumerable<LIS.Model.Models.tbluser>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.middlename)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.mobileno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isactive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tblrole.rolename)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.middlename)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mobileno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isactive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tblrole.rolename)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.userid }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.userid }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.userid })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            Users
+        </div>
+    </div>
+    <div class="card-body col-md-12">
+        <table id="tbluser" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Middle Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Password
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Mobile No
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Role Name
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.firstname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.middlename)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.lastname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.mobileno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.isactive)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblrole.rolename)
+                        </td>
+
+                        <td>
+                            <a href="@Url.Action("Edit","Registeruser",new { id = item.userid })" class="btn btn-sm btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>|
+                            @*<a href="@Url.Action("Details","Registeruser",new { id = item.userid })" class="btn btn-sm btn-success">
+                                    <i class="fa fa-eye"></i>
+                                </a>|*@
+                            <a href="@Url.Action("Delete","Registeruser",new { id = item.userid })" onclick="return confirm('Are you sure you wish to delete this supplier?');" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>|
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+
+
+        </table>
+    </div>
+    <div class="card-footer">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tbluser').DataTable();
+    });
+</script>

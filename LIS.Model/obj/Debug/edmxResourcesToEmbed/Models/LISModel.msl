@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="laboratory_information_systemModelStoreContainer" CdmEntityContainer="laboratory_information_systemEntities">
+    <EntitySetMapping Name="tblanalytics">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblanalytic">
+        <MappingFragment StoreEntitySet="tblanalytics">
+          <ScalarProperty Name="analyticid" ColumnName="analyticid" />
+          <ScalarProperty Name="diagnosisitem" ColumnName="diagnosisitem" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="minvalue" ColumnName="minvalue" />
+          <ScalarProperty Name="maxvalue" ColumnName="maxvalue" />
+          <ScalarProperty Name="measurementunit" ColumnName="measurementunit" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblbills">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblbill">
+        <MappingFragment StoreEntitySet="tblbill">
+          <ScalarProperty Name="billid" ColumnName="billid" />
+          <ScalarProperty Name="patientid" ColumnName="patientid" />
+          <ScalarProperty Name="totalprice" ColumnName="totalprice" />
+          <ScalarProperty Name="generateddate" ColumnName="generateddate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblcollectors">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblcollector">
+        <MappingFragment StoreEntitySet="tblcollector">
+          <ScalarProperty Name="collectorid" ColumnName="collectorid" />
+          <ScalarProperty Name="collectorname" ColumnName="collectorname" />
+          <ScalarProperty Name="sampleid" ColumnName="sampleid" />
+          <ScalarProperty Name="patientid" ColumnName="patientid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbldoctors">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tbldoctor">
+        <MappingFragment StoreEntitySet="tbldoctor">
+          <ScalarProperty Name="doctorid" ColumnName="doctorid" />
+          <ScalarProperty Name="doctorname" ColumnName="doctorname" />
+          <ScalarProperty Name="patientid" ColumnName="patientid" />
+          <ScalarProperty Name="doctormoblienumber" ColumnName="doctormoblienumber" />
+          <ScalarProperty Name="designation" ColumnName="designation" />
+          <ScalarProperty Name="doctoremail" ColumnName="doctoremail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblequipements">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblequipement">
+        <MappingFragment StoreEntitySet="tblequipement">
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="equipementid" ColumnName="equipementid" />
+          <ScalarProperty Name="equipementname" ColumnName="equipementname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblmachines">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblmachine">
+        <MappingFragment StoreEntitySet="tblmachine">
+          <ScalarProperty Name="machineid" ColumnName="machineid" />
+          <ScalarProperty Name="machinename" ColumnName="machinename" />
+          <ScalarProperty Name="template" ColumnName="template" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblpatients">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblpatient">
+        <MappingFragment StoreEntitySet="tblpatient">
+          <ScalarProperty Name="patientid" ColumnName="patientid" />
+          <ScalarProperty Name="patientfirstname" ColumnName="patientfirstname" />
+          <ScalarProperty Name="patientmiddelname" ColumnName="patientmiddelname" />
+          <ScalarProperty Name="patientlastname" ColumnName="patientlastname" />
+          <ScalarProperty Name="patientdob" ColumnName="patientdob" />
+          <ScalarProperty Name="patientmaritalstatus" ColumnName="patientmaritalstatus" />
+          <ScalarProperty Name="patientemail" ColumnName="patientemail" />
+          <ScalarProperty Name="patientmobllienumber" ColumnName="patientmobllienumber" />
+          <ScalarProperty Name="patientemergencynumber" ColumnName="patientemergencynumber" />
+          <ScalarProperty Name="created" ColumnName="created" />
+          <ScalarProperty Name="updated" ColumnName="updated" />
+          <ScalarProperty Name="HL7" ColumnName="HL7" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblpatienttests">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblpatienttest">
+        <MappingFragment StoreEntitySet="tblpatienttest">
+          <ScalarProperty Name="patienttestid" ColumnName="patienttestid" />
+          <ScalarProperty Name="testid" ColumnName="testid" />
+          <ScalarProperty Name="patientid" ColumnName="patientid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblpatienttestdetails">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblpatienttestdetail">
+        <MappingFragment StoreEntitySet="tblpatienttestdetails">
+          <ScalarProperty Name="patienttestdetailid" ColumnName="patienttestdetailid" />
+          <ScalarProperty Name="patienttestid" ColumnName="patienttestid" />
+          <ScalarProperty Name="testdetailid" ColumnName="testdetailid" />
+          <ScalarProperty Name="reading" ColumnName="reading" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblroles">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblrole">
+        <MappingFragment StoreEntitySet="tblrole">
+          <ScalarProperty Name="roleid" ColumnName="roleid" />
+          <ScalarProperty Name="rolename" ColumnName="rolename" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="createdby" ColumnName="createdby" />
+          <ScalarProperty Name="createddate" ColumnName="createddate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblsamples">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblsample">
+        <MappingFragment StoreEntitySet="tblsample">
+          <ScalarProperty Name="sampleid" ColumnName="sampleid" />
+          <ScalarProperty Name="patientid" ColumnName="patientid" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="startprocessdate" ColumnName="startprocessdate" />
+          <ScalarProperty Name="priority" ColumnName="priority" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblstocks">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblstock">
+        <MappingFragment StoreEntitySet="tblstock">
+          <ScalarProperty Name="stockid" ColumnName="stockid" />
+          <ScalarProperty Name="supplierid" ColumnName="supplierid" />
+          <ScalarProperty Name="patientid" ColumnName="patientid" />
+          <ScalarProperty Name="equipementid" ColumnName="equipementid" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quentity" ColumnName="quentity" />
+          <ScalarProperty Name="totalprice" ColumnName="totalprice" />
+          <ScalarProperty Name="arriveddate" ColumnName="arriveddate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblsuppliers">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblsupplier">
+        <MappingFragment StoreEntitySet="tblsupplier">
+          <ScalarProperty Name="supplierid" ColumnName="supplierid" />
+          <ScalarProperty Name="suppliername" ColumnName="suppliername" />
+          <ScalarProperty Name="suppliermoblienumber" ColumnName="suppliermoblienumber" />
+          <ScalarProperty Name="supplieremail" ColumnName="supplieremail" />
+          <ScalarProperty Name="supplieraddress" ColumnName="supplieraddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbltestdetailmasters">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tbltestdetailmaster">
+        <MappingFragment StoreEntitySet="tbltestdetailmaster">
+          <ScalarProperty Name="testdetaiid" ColumnName="testdetaiid" />
+          <ScalarProperty Name="testid" ColumnName="testid" />
+          <ScalarProperty Name="analyticid" ColumnName="analyticid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbltestmasters">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tbltestmaster">
+        <MappingFragment StoreEntitySet="tbltestmaster">
+          <ScalarProperty Name="testid" ColumnName="testid" />
+          <ScalarProperty Name="testname" ColumnName="testname" />
+          <ScalarProperty Name="testprice" ColumnName="testprice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblusers">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tbluser">
+        <MappingFragment StoreEntitySet="tbluser">
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="middlename" ColumnName="middlename" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="mobileno" ColumnName="mobileno" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbluserroles">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tbluserrole">
+        <MappingFragment StoreEntitySet="tbluserrole">
+          <ScalarProperty Name="uesrroleid" ColumnName="uesrroleid" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="roleid" ColumnName="roleid" />
+          <ScalarProperty Name="isdefault" ColumnName="isdefault" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblorders">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblorder">
+        <MappingFragment StoreEntitySet="tblorder">
+          <ScalarProperty Name="totalprice" ColumnName="totalprice" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="equipementid" ColumnName="equipementid" />
+          <ScalarProperty Name="patientid" ColumnName="patientid" />
+          <ScalarProperty Name="orderid" ColumnName="orderid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblpurchases">
+      <EntityTypeMapping TypeName="laboratory_information_systemModel.tblpurchase">
+        <MappingFragment StoreEntitySet="tblpurchase">
+          <ScalarProperty Name="purchasedate" ColumnName="purchasedate" />
+          <ScalarProperty Name="purchaseprice" ColumnName="purchaseprice" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="supplierid" ColumnName="supplierid" />
+          <ScalarProperty Name="equipementid" ColumnName="equipementid" />
+          <ScalarProperty Name="purchaseid" ColumnName="purchaseid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,117 @@
+﻿@model LIS.Model.Models.tblpurchase
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Edit Purchase </div>
+                    </div>
+                    <div class="card-body col-md-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.purchaseid)
+
+                        <div class="form-group">
+                            <label class="control-label col-md-5" for="equipementid">Equipement Name</label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("equipementid", ViewBag.list as SelectList, "--select--", htmlAttributes: new { @class = "form-control" })
+
+                                @*   @Html.DropDownListFor(model => model.equipementid,new SelectList(Model.tb),"--Select--")*@
+
+                                @Html.ValidationMessageFor(model => model.equipementid, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="supplierid">Supplier Name</label>
+                            <div class="col-md-10">
+                                @Html.DropDownList("supplierid", ViewBag.list1 as SelectList, "--select--", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.supplierid, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="quantity">Quantity</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control", @min = 0 } })
+                                @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="purchaseprice">Purchase Price</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.purchaseprice, new { htmlAttributes = new { @class = "form-control", @min = 0 } })
+                                @Html.ValidationMessageFor(model => model.purchaseprice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="purchasedate">Purchase Date</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.purchasedate, new { htmlAttributes = new { @class = "form-control", @Value = DateTime.Today.ToString("dd/MM/yyyy"), @readonly = "readonly" } })
+                                @Html.ValidationMessageFor(model => model.purchasedate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-success" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@*<script type='text/javascript'>
+        jQuery(function () {
+            jQuery("#purchasedate").datepicker();
+        });
+    </script>*@
+
+<script>
+    $(document).ready(function () {
+        $("#myform").validate({
+            rules: {
+                equipementid: {
+                    required: true,
+
+                },
+                supplierid: {
+                    required: true,
+
+                },
+                quantity: {
+                    required: true,
+                    number: true
+                },
+                purchaseprice: {
+                    required: true,
+
+                },
+                purchasedate: {
+                    required: true,
+
+                },
+            }
+        })
+    })
+</script>
+

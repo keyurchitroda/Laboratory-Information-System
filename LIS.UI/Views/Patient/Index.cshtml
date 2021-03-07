@@ -1,0 +1,103 @@
+﻿@model IEnumerable<LIS.Model.Models.tblpatient>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            Manage Patient 
+        </div>
+    </div>
+    <div class="card-body col-md-12">
+        <table id="tblpatient" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Firstname
+                    </th>
+                    <th>
+                        Middelname
+                    </th>
+                    <th>
+                        Lastname
+                    </th>
+                    <th>
+                        Dob
+                    </th>
+                    <th>
+                        marital Status
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Moblie Number
+                    </th>
+                    <th>
+                        Emergency Number
+                    </th>
+                    <th>
+                        HL7
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.patientfirstname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.patientmiddelname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.patientlastname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.patientdob)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.patientmaritalstatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.patientemail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.patientmobllienumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.patientemergencynumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HL7)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit","Patient",new { id = item.patientid })" class="btn btn-sm btn-warning" title="Modify">
+                                <i class="fa fa-pencil"></i>
+                            </a>|
+                            <a href="@Url.Action("Details","Patient",new { id = item.patientid })" class="btn btn-sm btn-success" title="Details">
+                                <i class="fa fa-eye"></i>
+                            </a>|
+                            <a href="@Url.Action("Delete","Patient",new { id = item.patientid })" onclick="return confirm('Are you sure you wish to delete this patient ?');" class="btn btn-sm btn-danger" title="Delete">
+                                <i class="fa fa-trash"></i>
+                            </a>|
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tblpatient').DataTable();
+    });
+</script>
+
+

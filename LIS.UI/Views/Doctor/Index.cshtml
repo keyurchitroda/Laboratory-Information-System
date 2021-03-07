@@ -1,0 +1,70 @@
+﻿@model IEnumerable<LIS.Model.Models.tbldoctor>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            Manage Doctor
+        </div>
+    </div>
+    <div class="card-body col-md-12">
+        <table id="tbldoctor" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                       Doctor Name
+                    </th>
+                    <th>
+                        Mobile No
+                    </th>
+                    <th>
+                        Designation
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.doctorname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.doctormoblienumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.designation)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.doctoremail)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit","Doctor",new { id = item.doctorid })" class="btn btn-sm btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>|
+                            <a href="@Url.Action("Details","Doctor",new { id = item.doctorid })" class="btn btn-sm btn-success">
+                                <i class="fa fa-eye"></i>
+                            </a>|
+                            <a href="@Url.Action("Delete","Doctor",new { id = item.doctorid })" onclick="return confirm('Are you sure you wish to delete this doctor ?');" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>|
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tbldoctor').DataTable();
+    });
+</script>

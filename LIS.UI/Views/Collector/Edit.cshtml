@@ -1,0 +1,117 @@
+﻿@model LIS.Model.Models.tblcollector
+
+<!--Header-->
+<div class="card card-body breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Modify Details</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li>
+                                <a href="@Url.Action("Index")" class="btn btn-sm btn-info right">
+                                    <i class="fa fa-arrow-left"></i> Back
+                                </a>
+                            </li>
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Header-->
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+
+                    </div>
+                    <div class="card-body col-md-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.collectorid)
+
+                        <div class="form-group">
+
+                            <label class="control-label col-md-5" for="collectorname">Collector name</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.collectorname, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.collectorname, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-5" for="collectoremail">Email</label>
+
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.collectoremail, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.collectoremail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="collectorphno">Phone</label>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.collectorphno, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.collectorphno, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Update" class="btn btn-success" />
+                                <input type="reset" value="Cancel" class="btn btn-danger" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type='text/javascript'>
+
+    $(document).ready(function () {
+
+        $("#myform").validate({
+            rules: {
+                collectorname:
+                {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 15,
+                    lettersonly:true,
+                },
+                collectoremail:
+                {
+                    required: true,
+                    email:true,
+                },
+                collectorphno:
+                {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 10,
+                    number:true,
+                },
+            }
+        });
+    })
+</script>

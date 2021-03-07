@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Patient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Patient</h2>
+<form id="frmpatient">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Manage Patient </div>
+                    </div>
+                    <div class="card-body col-md-7">
+                        <div class="form-group">
+                            <label for="txtfPatientname">Patient Firstname</label>
+                            <input type="text" class="form-control" id="txtfPatientname" name="txtfPatientname" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtmpatientname">Patient MiddleName</label>
+                            <input type="text" class="form-control" id="txtmpatientname" name="txtmpatientname" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtlpatientname">Patient LastName</label>
+                            <input type="text" class="form-control" id="txtlpatientname" name="txtlpatientname" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtpdob">Patient DOB</label>
+                            <input type="text" class="form-control" id="txtpdob" name="txtpdob" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtpmarrital">Patient Marrital Status</label>
+                            <input type="text" class="form-control" id="txtpmarrital" name="txtpmarrital" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtpemail">Patient Email</label>
+                            <input type="text" class="form-control" id="txtpemail" name="txtpemail" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtpmobile">Patient Mobile Number</label>
+                            <input type="text" class="form-control" id="txtpmobile" name="txtpmobile" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtpemobile">Patient Emergency Mobile Number</label>
+                            <input type="text" class="form-control" id="txtpemobile" name="txtpemobile" />
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="filehl7" class=" form-control-label">HL7</label>
+                            <input type="file" id="filehl7" name="filehl7" class="form-control-file" />
+                        </div>
+
+
+                        <div class="form-group">
+                            <input type="button" id="btnpatientsave" name="btnpatientsave" class="btn btn-success" value="Save" />
+                            <input type="button" name="btnpatientcancel" class="btn btn-default" value="Cancel" />
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</form>
+
+

@@ -1,0 +1,84 @@
+﻿@model LIS.Model.Models.tbltestmaster
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <center><h4 class="modal-title" id="exampleModalLongTitle">Testmaster Details</h4></center>
+            </div>
+
+            <div class="modal-body">
+                <div>
+                    <dl class="dl-horizontal">
+                        @Html.HiddenFor(model => model.testid)
+                        <dt>
+                            @Html.DisplayNameFor(model => model.testname)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.testname)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.testprice)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.testprice)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.analyticlist)
+                        </dt>
+
+                        <dd>
+                            @*@Html.DisplayFor(model => model.analyticlist)*@
+                            <div id="testdiv">
+
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="@Url.Action("Edit","Testmaster",new { id = Model.testid })" class="btn btn-sm btn-warning">
+                    <i class="fa fa-pencil"></i>Edit
+                </a>
+                <a href="@Url.Action("Index")" class="btn btn-sm btn-info right">
+                    <i class="fa fa-arrow-left"></i> Back
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        jQuery("#exampleModalCenter").modal('show');
+
+        var testid = $('#testid').val();
+
+        $.ajax({
+            url: "/Patienttestresult/GetAnalyticsFromTest/" + testid,
+            type: "GET",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                var html = '';
+                for (var i = 0; i < result.length; i++) {
+                    var obj = result[i];
+                    html += `<span>${obj.analyticid} - ${obj.diagnosisitem}</span><br/>`;
+                }
+                $('#testdiv').html(html);
+            },
+            error: function (errormessage) {
+
+            }
+        });
+    })
+</script>
+
+
+
+

@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "TestMaster";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TestMaster</h2>
+
+<form id="frmtestmaster">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Manage Test Master</div>
+                    </div>
+                    <div class="card-body col-md-7">
+
+                        <div class="form-group">
+                            <label for="txttestname">Test Name</label>
+                            <input type="text" class="form-control" id="txttestname" name="txttestname" />
+                        </div>
+                        <div class="form-group">
+                            <label class=" form-control-label"> Test Price</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-usd"></i></div>
+                                <input class="form-control" id="txttestprice" name="txttestprice">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <input type="button" id="btntestmastersave" name="btntestmastersave" class="btn btn-success" value="Save" />
+                            <input type="button" name="btntestmastercancel" class="btn btn-default" value="Cancel" />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

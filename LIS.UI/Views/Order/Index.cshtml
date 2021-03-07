@@ -1,0 +1,86 @@
+﻿@model IEnumerable<LIS.Model.Models.tblorder>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            Use on Patient
+        </div>
+    </div>
+    <div class="card-body col-md-12">
+        <table id="tblorder" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Patient Firstname
+                    </th>
+                    <th>
+                        Equipement Name
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Date
+                    </th>
+
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblpatient.patientfirstname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tblequipement.equipementname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.quantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.date)
+                        </td>
+
+                        <td>
+                            <a href="@Url.Action("Edit","Order",new { id = item.orderid })" class="btn btn-sm btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>|
+                            <a href="@Url.Action("Details","Order",new { id = item.orderid })" class="btn btn-sm btn-success">
+                                <i class="fa fa-eye"></i>
+                            </a>|
+                            <a href="@Url.Action("Delete","Order",new { id = item.orderid })" onclick="return confirm('Are you sure you wish to delete this Order?');" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>|
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+
+
+        </table>
+        <h3 style="color:red"><strong>@TempData["Message"]</strong></h3>
+    </div>
+    <div class="card-footer">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tblorder').DataTable();
+    });
+</script>

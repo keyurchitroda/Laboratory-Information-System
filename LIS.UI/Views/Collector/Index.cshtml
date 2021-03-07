@@ -1,0 +1,64 @@
+﻿@model IEnumerable<LIS.Model.Models.tblcollector>
+
+<p>
+    @Html.ActionLink("Create New", "Create", null, null, new { @class = "btn btn-primary" })
+</p>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            Manage Collector
+        </div>
+    </div>
+    <div class="card-body col-md-12">
+        <table id="tblcollector" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Collector name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Phone number
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.collectorname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.collectoremail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.collectorphno)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit","Collector",new { id = item.collectorid })" class="btn btn-sm btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </a>|
+                            <a href="@Url.Action("Details","Collector",new { id = item.collectorid })" class="btn btn-sm btn-success">
+                                <i class="fa fa-eye"></i>
+                            </a>|
+                            <a href="@Url.Action("Delete","Collector",new { id = item.collectorid })" onclick="return confirm('Are you sure you wish to delete this collector ?');" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>|
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tblcollector').DataTable();
+    });
+</script>
